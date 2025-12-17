@@ -1,6 +1,0 @@
-module CPPProjekt
-typeinfo appCPPProjekt.qmltypes
-prefer :/qt/qml/CPPProjekt/
-Main 254.0 Main.qml
-depends QtQuick
-
