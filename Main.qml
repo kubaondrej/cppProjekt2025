@@ -33,42 +33,48 @@ ApplicationWindow {
             }
         }
 
-        GridView {
-            id: grid
-            model: mapModel
-
-            cellWidth: 24
-            cellHeight: 24
-
-            width: mapModel.size * cellWidth
-            height: parent.height - 80
+        Item {
+            id: mapArea
+            width: grid.width
+            height: grid.height
             anchors.horizontalCenter: parent.horizontalCenter
 
-            delegate: Rectangle {
-                width: grid.cellWidth
-                height: grid.cellHeight
-                border.width: 1
+            // MAPA
+            GridView {
+                id: grid
+                model: mapModel
 
-                color: {
-                    if (terrain === 1) return "dodgerblue" // Water
-                    if (terrain === 2) return "gray"       // Mountain
-                    return "lightgreen"                    // Grass
+                cellWidth: 24
+                cellHeight: 24
+
+                width: mapModel.size * cellWidth
+                height: mapModel.size * cellHeight
+                anchors.centerIn: parent
+
+                delegate: Rectangle {
+                    width: grid.cellWidth
+                    height: grid.cellHeight
+                    border.width: 1
+
+                    color: {
+                        if (terrain === 1) return "dodgerblue" // Water
+                        if (terrain === 2) return "gray"       // Mountain
+                        return "lightgreen"                    // Grass
+                    }
                 }
             }
 
-            contentItem: Item {
-                Repeater {
-                    model: unitModel
+            Repeater {
+                model: unitModel
 
-                    Rectangle {
-                        width: grid.cellWidth
-                        height: grid.cellHeight
-                        x: ux * grid.cellWidth
-                        y: uy * grid.cellHeight
-                        color: "yellow"
-                        radius: 4
-                        z: 10
-                    }
+                Rectangle {
+                    width: grid.cellWidth
+                    height: grid.cellHeight
+                    x: grid.x + ux * grid.cellWidth
+                    y: grid.y + uy * grid.cellHeight
+                    color: "yellow"
+                    radius: 4
+                    z: 10
                 }
             }
         }
