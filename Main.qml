@@ -55,6 +55,22 @@ ApplicationWindow {
                     return "lightgreen"                    // Grass
                 }
             }
+
+            contentItem: Item {
+                Repeater {
+                    model: unitModel
+
+                    Rectangle {
+                        width: grid.cellWidth
+                        height: grid.cellHeight
+                        x: ux * grid.cellWidth
+                        y: uy * grid.cellHeight
+                        color: "yellow"
+                        radius: 4
+                        z: 10
+                    }
+                }
+            }
         }
     }
 }
