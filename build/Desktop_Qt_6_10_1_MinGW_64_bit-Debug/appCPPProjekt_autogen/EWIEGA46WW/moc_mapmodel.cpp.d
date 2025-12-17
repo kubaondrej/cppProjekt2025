@@ -1,5 +1,5 @@
-C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/EWIEGA46WW/moc_mapmodel.cpp: C:/Users/yona/Documents/cppProjekt2025/mapmodel.h \
-  C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/moc_predefs.h \
+C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/EWIEGA46WW/moc_mapmodel.cpp: C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/mapmodel.h \
+  C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/moc_predefs.h \
   C:/Qt/6.10.1/mingw_64/include/QtCore/QAbstractListModel \
   C:/Qt/6.10.1/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.10.1/mingw_64/include/QtCore/q20functional.h \
