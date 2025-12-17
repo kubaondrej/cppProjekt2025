@@ -90,7 +90,7 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 29,
+				"line" : 30,
 				"parent" : 0
 			},
 			{
@@ -359,7 +359,7 @@
 			{
 				"command" : 20,
 				"file" : 1,
-				"line" : 23,
+				"line" : 24,
 				"parent" : 0
 			},
 			{
@@ -476,7 +476,7 @@
 			[
 				{
 					"backtrace" : 0,
-					"path" : "C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/include"
+					"path" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/include"
 				},
 				{
 					"backtrace" : 29,
@@ -544,7 +544,8 @@
 				0,
 				1,
 				2,
-				4
+				5,
+				6
 			]
 		}
 	],
@@ -555,11 +556,11 @@
 			"id" : "appCPPProjekt_qmlimportscan::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 0,
-			"id" : "appCPPProjekt_autogen::@6890427a1f51a3e7e1df"
+			"id" : "appCPPProjekt_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		},
 		{
-			"id" : "appCPPProjekt_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+			"backtrace" : 0,
+			"id" : "appCPPProjekt_autogen::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "appCPPProjekt::@6890427a1f51a3e7e1df",
@@ -676,9 +677,9 @@
 			"sourceIndexes" : 
 			[
 				0,
-				4,
-				5,
-				7
+				6,
+				7,
+				9
 			]
 		},
 		{
@@ -686,29 +687,31 @@
 			"sourceIndexes" : 
 			[
 				1,
-				2
+				2,
+				5
 			]
 		},
 		{
 			"name" : "Header Files",
 			"sourceIndexes" : 
 			[
-				3
+				3,
+				4
 			]
 		},
 		{
 			"name" : "Resources",
 			"sourceIndexes" : 
 			[
-				6
+				8
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				8,
-				9
+				10,
+				11
 			]
 		}
 	],
@@ -737,6 +740,17 @@
 			"backtrace" : 4,
 			"path" : "mapmodel.h",
 			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"path" : "unitmodel.h",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "unitmodel.cpp",
+			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 58,

@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug"
+			"value" : "c:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -563,7 +563,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025"
 		},
 		{
 			"name" : "CMAKE_INSTALL_BINDIR",
@@ -1063,7 +1063,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake"
 		},
 		{
 			"name" : "CMAKE_PROJECT_NAME",
@@ -1479,7 +1479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug"
 		},
 		{
 			"name" : "CPPProjekt_IS_TOP_LEVEL",
@@ -1503,7 +1503,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025"
 		},
 		{
 			"name" : "HAVE_STDATOMIC",
@@ -6579,7 +6579,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/bin/qt_setup_tool_path.bat"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/bin/qt_setup_tool_path.bat"
 		},
 		{
 			"name" : "Qt6Concurrent_DIR",
