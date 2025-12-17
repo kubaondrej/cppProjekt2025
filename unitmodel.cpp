@@ -1,4 +1,4 @@
-#include "UnitModel.h"
+#include "unitmodel.h"
 
 UnitModel::UnitModel(QObject *parent)
     : QAbstractListModel(parent)
@@ -17,16 +17,16 @@ QVariant UnitModel::data(const QModelIndex &index, int role) const
     if (!index.isValid() || index.row() >= m_units.size())
         return QVariant();
 
-    const Unit &u = m_units[index.row()];
+    Unit *u = m_units[index.row()];
 
     switch (role) {
-    case NameRole:        return u.name;
-    case HealthRole:      return u.health;
-    case OwnerIdRole:     return u.ownerId;
-    case MoveRangeRole:   return u.moveRange;
-    case AttackPowerRole: return u.attackPower;
-    case XRole:           return u.ux;
-    case YRole:           return u.uy;
+    case NameRole:        return u->m_name;
+    case HealthRole:      return u->m_health;
+    case OwnerIdRole:     return u->m_ownerId;
+    case MoveRangeRole:   return u->m_moveRange;
+    case AttackPowerRole: return u->m_attackPower;
+    case XRole:           return u->m_ux;
+    case YRole:           return u->m_uy;
     }
 
     return QVariant();
@@ -48,13 +48,9 @@ QHash<int, QByteArray> UnitModel::roleNames() const
 void UnitModel::addUnit(int x, int y)
 {
     beginInsertRows(QModelIndex(), m_units.size(), m_units.size());
-    m_units.append({
-        "Unit",   // name
-        100,      // health
-        1,        // ownerId
-        3,        // moveRange
-        10,       // attackPower
-        x, y      // position
-    });
+
+    Unit *u = new Unit("Unit", 1, 3, 10, x, y, this);
+    m_units.append(u);
+
     endInsertRows();
 }
