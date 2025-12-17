@@ -46,8 +46,7 @@ ApplicationWindow {
                         width: 200
                         height: 50
                         font.pixelSize: 24
-                        placeholderText: "např. 10"
-                        text: "10"
+                        text: "15"
                         inputMethodHints: Qt.ImhDigitsOnly
                         horizontalAlignment: Text.AlignHCenter
                         Layout.alignment: Qt.AlignHCenter
@@ -66,8 +65,7 @@ ApplicationWindow {
                         width: 200
                         height: 50
                         font.pixelSize: 24
-                        placeholderText: "např. 10"
-                        text: "10"
+                        text: "45"
                         inputMethodHints: Qt.ImhDigitsOnly
                         horizontalAlignment: Text.AlignHCenter
                         Layout.alignment: Qt.AlignHCenter
@@ -75,7 +73,7 @@ ApplicationWindow {
                         validator: IntValidator { bottom: 5; top: 20 }
                     }
 
-
+    RowLayout {
                     Button {
                         text: "Začít hru"
                         font.pixelSize: 24
@@ -91,8 +89,8 @@ ApplicationWindow {
                             var mapSize = parseInt(mapSizeInput.text)
                             root.currentCellSize = parseInt(cellSizeInput.text)
                             if (mapSize >= 5 && mapSize <= 20) {
-                                mapModel.generate(mapSize)          // zavoláš svou funkci
-                                stack.push(gameScreen)           // přepne na mapu
+                                mapModel.generate(mapSize)
+                                stack.push(gameScreen)
                             } else {
                                 messageDialog.text = "Zadej číslo 5–20!"
                                 messageDialog.open()
@@ -100,10 +98,29 @@ ApplicationWindow {
                             console.log("Aktuální velikost mapModel.size:", cellSize)
                         }
                     }
+                    Button
+                    {
+                        text: "Konec"
+                        font.pixelSize: 24
+                        width: 250
+                        height: 60
+
+                        background: Rectangle
+                        {
+                            color: "#e74c3c"
+                            radius: 10
+                        }
+
+                        onClicked:
+                        {
+                            console.log("Uživatel ukončil aplikaci z menu")
+                            Qt.quit()
+                        }
+                    }
                 }
             }
         }
-
+    }
     Component {
             id: gameScreen
 
@@ -122,6 +139,7 @@ ApplicationWindow {
 
                         GridView {
                             id: grid
+                            interactive: false //pry zakaze "scrollovani" mapy?
                             model: mapModel
                             cellWidth: root.currentCellSize
                             cellHeight: root.currentCellSize
@@ -155,6 +173,27 @@ ApplicationWindow {
                         }
                     }
                 }
+
+            Button {
+                        text: "X"
+                        font.pixelSize: 20
+                        width: 50
+                        height: 50
+
+                        anchors.right: parent.right
+                        anchors.bottom: parent.bottom
+                        anchors.margins: 30
+
+                        background: Rectangle {
+                            color: "#e74c3c"
+                            radius: 10
+                        }
+
+                        onClicked: {
+                            console.log("Aplikace ukončena z menu")
+                            Qt.quit()
+                        }
+                    }
             }
         }
 }

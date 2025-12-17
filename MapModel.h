@@ -5,8 +5,7 @@
 
 enum class Terrain : int {
     Grass = 0,
-    Water = 1,
-    Mountain = 2
+    Water = 1
 };
 
 struct Tile {
