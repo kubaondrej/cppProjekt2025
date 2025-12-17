@@ -66,6 +66,8 @@ public:
     Unit* getUnit(int index) const;
     void removeUnit(int index);
     int findUnitIndex(int x, int y) const;
+    Q_INVOKABLE void updatePosition(int index, int x, int y);
+    Q_INVOKABLE void updateHealth(int index, int health);
 
     explicit UnitModel(QObject *parent = nullptr);
 
@@ -73,8 +75,8 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    Q_INVOKABLE void addUnit(int x, int y);
-
+    Q_INVOKABLE void addUnit(int x, int y, int ownerId);
+    bool hasUnits(int ownerId) const;
 private:
     QList<Unit*> m_units;
 };

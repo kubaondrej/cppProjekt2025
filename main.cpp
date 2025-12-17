@@ -5,6 +5,7 @@
 
 #include "mapmodel.h"
 #include "unitmodel.h"
+#include "gamecontroller.h"
 
 int main(int argc, char *argv[])
 {
@@ -12,19 +13,16 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    // MAPA
     MapModel mapModel;
-    mapModel.generate(10);
 
-    // JEDNOTKY
     UnitModel unitModel;
-    unitModel.addUnit(1, 1);
-    unitModel.addUnit(3, 4);
 
-    //test zmeny
-    // REGISTRACE DO QML
+    GameController gameController(&unitModel, &mapModel);
+
     engine.rootContext()->setContextProperty("mapModel", &mapModel);
     engine.rootContext()->setContextProperty("unitModel", &unitModel);
+    engine.rootContext()->setContextProperty("gameController", &gameController);
+
 
     const QUrl url(QStringLiteral("qrc:/Main.qml"));
     QObject::connect(

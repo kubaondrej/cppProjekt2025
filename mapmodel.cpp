@@ -53,7 +53,7 @@ void MapModel::generate(int n) {
     for (int i = 0; i < continents; ++i) {
         int cx = QRandomGenerator::global()->bounded(2, n - 2);
         int cy = QRandomGenerator::global()->bounded(2, n - 2);
-        int radius = QRandomGenerator::global()->bounded(2, 5); // 2..4
+        int radius = QRandomGenerator::global()->bounded(2, 5);
 
         for (int y = cy - radius; y <= cy + radius; ++y) {
             for (int x = cx - radius; x <= cx + radius; ++x) {

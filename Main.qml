@@ -5,6 +5,7 @@ import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Dialogs
+
 ApplicationWindow {
     id: root
     visible: true
@@ -12,78 +13,102 @@ ApplicationWindow {
     height: 800
     title: "CPPProjekt – mapa"
     property int currentCellSize: 40
+
     StackView {
-            id: stack
-            anchors.fill: parent
-            initialItem: menuScreen
+        id: stack
+        anchors.fill: parent
+        initialItem: menuScreen
+    }
+
+    MessageDialog {
+        id: messageDialog
+        title: "Chyba vstupu"
+        text: "Zadejte platná čísla (Mapa: 5-20)."
+    }
+
+    MessageDialog {
+        id: gameOverDialog
+        title: "Konec hry"
+        onAccepted: {
+            stack.pop()
         }
+    }
 
+    Connections {
+        target: gameController
+
+        function onGameOver(msg) {
+            gameOverDialog.text = msg
+            gameOverDialog.open()
+        }
+    }
+
+    // --- MENU ---
     Component {
-            id: menuScreen
-            Rectangle {
-                color: "#1f1f1f"
-                border.color: "#00173b"
-                border.width: 20
-                radius:15
+        id: menuScreen
+        Rectangle {
+            color: "#1f1f1f"
+            border.color: "#00173b"
+            border.width: 20
+            radius: 15
 
+            ColumnLayout {
+                anchors.centerIn: parent
+                spacing: 30
 
-                ColumnLayout {
-                    anchors.centerIn: parent
-                    spacing: 30
+                Text {
+                    text: "Tanky a lodě"
+                    font.pixelSize: 36
+                    color: "white"
+                    Layout.alignment: Qt.AlignHCenter
+                }
 
-                    Text {
-                        text: "Tanky a lodě, zabili koně"
-                        font.pixelSize: 36
-                        color: "white"
-                        Layout.alignment: Qt.AlignHCenter
-                    }
+                Text {
+                    text: "Zadej velikost mapy (5–20)"
+                    font.pixelSize: 20
+                    color: "#bdc3c7"
+                    Layout.alignment: Qt.AlignHCenter
+                }
 
-                    Text {
-                        text: "Zadej velikost mapy (5–20)"
-                        font.pixelSize: 20
-                        color: "#bdc3c7"
-                        Layout.alignment: Qt.AlignHCenter
-                    }
+                TextField {
+                    id: mapSizeInput
+                    width: 200
+                    height: 50
+                    font.pixelSize: 24
+                    text: "10"
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    horizontalAlignment: Text.AlignHCenter
+                    Layout.alignment: Qt.AlignHCenter
+                    validator: IntValidator { bottom: 5; top: 20 }
+                }
 
-                    TextField {
-                        id: mapSizeInput
-                        width: 200
-                        height: 50
-                        font.pixelSize: 24
-                        text: "15"
-                        inputMethodHints: Qt.ImhDigitsOnly
-                        horizontalAlignment: Text.AlignHCenter
-                        Layout.alignment: Qt.AlignHCenter
+                Text {
+                    text: "Zadej velikost políčka"
+                    font.pixelSize: 20
+                    color: "#bdc3c7"
+                    Layout.alignment: Qt.AlignHCenter
+                }
 
-                        validator: IntValidator { bottom: 5; top: 20 }
-                    }
+                TextField {
+                    id: cellSizeInput
+                    width: 200
+                    height: 50
+                    font.pixelSize: 24
+                    text: "50"
+                    inputMethodHints: Qt.ImhDigitsOnly
+                    horizontalAlignment: Text.AlignHCenter
+                    Layout.alignment: Qt.AlignHCenter
+                    validator: IntValidator { bottom: 20; top: 100 }
+                }
 
-                    Text {
-                        text: "Zadej velikost políčka"
-                        font.pixelSize: 20
-                        color: "#bdc3c7"
-                        Layout.alignment: Qt.AlignHCenter
-                    }
-                    TextField {
-                        id: cellSizeInput
-                        width: 200
-                        height: 50
-                        font.pixelSize: 24
-                        text: "50"
-                        inputMethodHints: Qt.ImhDigitsOnly
-                        horizontalAlignment: Text.AlignHCenter
-                        Layout.alignment: Qt.AlignHCenter
+                RowLayout {
+                    spacing: 20
 
-                        validator: IntValidator { bottom: 5; top: 20 }
-                    }
-
-            RowLayout {
                     Button {
                         text: "Začít hru"
                         font.pixelSize: 24
-                        width: 250
-                        height: 60
-
+                        Layout.preferredWidth: 200
+                        Layout.preferredHeight: 60
                         background: Rectangle {
                             color: "#27ae60"
                             radius: 10
@@ -92,33 +117,27 @@ ApplicationWindow {
                         onClicked: {
                             var mapSize = parseInt(mapSizeInput.text)
                             root.currentCellSize = parseInt(cellSizeInput.text)
+
                             if (mapSize >= 5 && mapSize <= 20) {
                                 mapModel.generate(mapSize)
                                 stack.push(gameScreen)
-                            } else
-                            {
-
+                            } else {
                                 messageDialog.open()
                             }
-                            console.log("Aktuální velikost mapModel.size:", cellSize)
                         }
                     }
-                    Button
-                    {
+
+                    Button {
                         text: "Konec"
                         font.pixelSize: 24
-                        width: 250
-                        height: 60
-
-                        background: Rectangle
-                        {
+                        Layout.preferredWidth: 200
+                        Layout.preferredHeight: 60
+                        background: Rectangle {
                             color: "#e74c3c"
                             radius: 10
                         }
 
-                        onClicked:
-                        {
-                            console.log("KONEC")
+                        onClicked: {
                             Qt.quit()
                         }
                     }
@@ -126,120 +145,144 @@ ApplicationWindow {
             }
         }
     }
+
+    // --- HRA ---
     Component {
-            id: gameScreen
+        id: gameScreen
+        Item {
+            Rectangle {
+                id: topBar
+                width: parent.width
+                height: 60
+                color: "#2c3e50"
+                z: 100
 
-            Item {
-
-                Column {
+                RowLayout {
                     anchors.fill: parent
-                    spacing: 10
-                    padding: 10
+                    anchors.margins: 10
+                    Text {
+                        text: gameController.statusMessage
+                        color: "white"
+                        font.pixelSize: 20
+                        font.bold: true
+                        Layout.fillWidth: true
+                        horizontalAlignment: Text.AlignHCenter
+                        verticalAlignment: Text.AlignVCenter
+                    }
 
+                    Rectangle {
+                        width: 30; height: 30
+                        radius: 15
+                        color: gameController.currentPlayer === 1 ? "#3498db" : "#e74c3c"
+                        border.color: "white"
+                        border.width: 2
+                    }
+                }
+            }
 
-                    Item {
-                        id: mapArea
-                        width: grid.width
-                        height: grid.height
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        anchors.verticalCenter: parent.horizontalCenter
+            Column {
+                anchors.top: topBar.bottom
+                anchors.bottom: parent.bottom
+                anchors.left: parent.left
+                anchors.right: parent.right
 
-                        GridView {
-                            id: grid
-                            interactive: false //pry zakaze "scrollovani" mapy?
-                            model: mapModel
-                            cellWidth: root.currentCellSize
-                            cellHeight: root.currentCellSize
-                            width: mapModel.size * cellWidth
-                            height: mapModel.size * cellHeight
-                            anchors.centerIn: parent
+                Item {
+                    id: mapArea
+                    width: grid.width
+                    height: grid.height
+                    anchors.centerIn: parent
 
-                            delegate: Rectangle {
-                                width: grid.cellWidth
-                                height: grid.cellHeight
-                                border.width: 1
-                                color: {
-                                    if (terrain === 1) return "dodgerblue"
-                                    else if (terrain === 2) return "gray"
-                                    return "lightgreen"
+                    GridView {
+                        id: grid
+                        interactive: false
+                        model: mapModel
+                        cellWidth: root.currentCellSize
+                        cellHeight: root.currentCellSize
+                        width: mapModel.size * cellWidth
+                        height: mapModel.size * cellHeight
+
+                        delegate: Rectangle {
+                            width: grid.cellWidth
+                            height: grid.cellHeight
+                            border.width: 1
+                            border.color: rgba(1,1,1,0.1)
+                            color: terrain === 1 ? "dodgerblue" : "lightgreen"
+
+                            MouseArea {
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+
+                                onClicked: {
+                                    var col = index % mapModel.size
+                                    var row = Math.floor(index / mapModel.size)
+                                    console.log("Klik: [" + col + ", " + row + "]")
+                                    gameController.handleTileClick(col, row)
                                 }
-                                MouseArea {
-                                        anchors.fill: parent
-                                        hoverEnabled: true  // pro budoucí hover efekty
-
-                                        onClicked: {
-                                            // Výpočet souřadnic z indexu v modelu
-                                            var col = index % mapModel.size          // x souřadnice (sloupec)
-                                            var row = Math.floor(index / mapModel.size)  // y souřadnice (řádek)
-
-                                            console.log("Kliknuto na políčko: [" + col + ", " + row + "]")
-                                            console.log("Typ terénu:", model.terrain)
-                                            console.log("Index v modelu:", index)
-                                            unitModel.addUnit(col, row)
-                                            // Zde později budeš volat C++ funkci nebo přidávat jednotku
-                                            // např. unitModel.addUnit(col, row, 1)  // 1 = typ jednotky
-                                        }
-
-                                        // Volitelný hover efekt – políčko se zvýrazní
-                                        onEntered:{ parent.border.color = "yellow"
-                                                    parent.border.width = 3}
-                                        onExited:{ parent.border.width = 1
-                                                    parent.border.color = "black"}
-                                    }
+                                onEntered: {
+                                    parent.border.color = "yellow"
+                                    parent.border.width = 3
+                                }
+                                onExited: {
+                                    parent.border.width = 1
+                                    parent.border.color = "rgba(0,0,0,0.1)"
+                                }
                             }
                         }
 
                         Repeater {
                             model: unitModel
                             Rectangle {
-                                width: grid.cellWidth
-                                height: grid.cellHeight
-                                x: grid.x + ux * grid.cellWidth
-                                y: grid.y + uy * grid.cellHeight
-                                color: "yellow"
-                                radius: 4
+                                id: unitRect
+                                width: grid.cellWidth * 0.8
+                                height: grid.cellHeight * 0.8
+                                radius: width / 2
+
+                                x: grid.x + ux * grid.cellWidth + (grid.cellWidth * 0.1)
+                                y: grid.y + uy * grid.cellHeight + (grid.cellHeight * 0.1)
                                 z: 10
 
-                                Rectangle{
+                                color: ownerId === 1 ? "#3498db" : "#e74c3c"
+
+                                border.color: "white"
+                                border.width: 2
+
+                                Text {
                                     anchors.centerIn: parent
-                                    width: grid.cellHeight-grid.cellHeight/2
-                                    height: grid.cellWidth-grid.cellWidth/2
+                                    text: health
+                                    color: "white"
+                                    font.bold: true
+                                    font.pixelSize: parent.width * 0.4
                                 }
                             }
-
-
                         }
                     }
-
+                }
             }
-
-
             Button {
-                        text: "X"
-                        font.pixelSize: 20
-                        width: 50
-                        height: 50
-
-                        anchors.right: parent.right
-                        anchors.bottom: parent.bottom
-                        anchors.margins: 30
-
-                        background: Rectangle {
-                            color: "#e74c3c"
-                            radius: 10
-                        }
-
-                        onClicked: {
-                            console.log("MENU")
-                            stack.pop()
-                        }
-                    }
+                text: "X"
+                font.pixelSize: 20
+                width: 50
+                height: 50
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                anchors.margins: 30
+                background: Rectangle {
+                    color: "#e74c3c"
+                    radius: 25
+                    opacity: 0.8
+                }
+                contentItem: Text {
+                    text: parent.text
+                    font: parent.font
+                    color: "white"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                }
+                onClicked: {
+                    stack.pop()
+                }
             }
         }
-    MessageDialog {
-        id: messageDialog
-        title: "Chyba vstupu"
-        text: "Chyba vstupu"
-
     }
 }

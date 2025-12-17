@@ -45,14 +45,19 @@ QHash<int, QByteArray> UnitModel::roleNames() const
     return roles;
 }
 
-void UnitModel::addUnit(int x, int y)
+void UnitModel::addUnit(int x, int y, int ownerId)
 {
     beginInsertRows(QModelIndex(), m_units.size(), m_units.size());
-
-    Unit *u = new Unit("Unit", 1, 3, 10, x, y, this);
+    Unit *u = new Unit("Soldier", ownerId, 3, 25, x, y, this);
     m_units.append(u);
-
     endInsertRows();
+}
+
+bool UnitModel::hasUnits(int ownerId) const {
+    for (const auto* unit : m_units) {
+        if (unit->m_ownerId == ownerId) return true;
+    }
+    return false;
 }
 
 Unit* UnitModel::getUnit(int index) const {
@@ -73,4 +78,24 @@ void UnitModel::removeUnit(int index) {
     Unit* u = m_units.takeAt(index);
     delete u;
     endRemoveRows();
+}
+
+void UnitModel::updatePosition(int index, int x, int y) {
+    if (index < 0 || index >= m_units.size()) return;
+
+    Unit* u = m_units[index];
+    u->m_ux = x;
+    u->m_uy = y;
+    QModelIndex modelIndex = createIndex(index, 0);
+    emit dataChanged(modelIndex, modelIndex, {XRole, YRole});
+}
+
+void UnitModel::updateHealth(int index, int health) {
+    if (index < 0 || index >= m_units.size()) return;
+
+    Unit* u = m_units[index];
+    u->m_health = health;
+
+    QModelIndex modelIndex = createIndex(index, 0);
+    emit dataChanged(modelIndex, modelIndex, {HealthRole});
 }
