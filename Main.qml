@@ -4,10 +4,11 @@ import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Layouts 1.15
+import QtQuick.Dialogs
 ApplicationWindow {
     id: root
     visible: true
-    width: 900
+    width: 1000
     height: 700
     title: "CPPProjekt – mapa"
     property int currentCellSize: 40
@@ -19,16 +20,19 @@ ApplicationWindow {
 
     Component {
             id: menuScreen
-
             Rectangle {
-                color: "#2c3e50"
+                color: "#1f1f1f"
+                border.color: "#00173b"
+                border.width: 20
+                radius:15
+
 
                 ColumnLayout {
                     anchors.centerIn: parent
                     spacing: 30
 
                     Text {
-                        text: "Vítej ve strategické hře!"
+                        text: "Tanky a lodě, zabili koně"
                         font.pixelSize: 36
                         color: "white"
                         Layout.alignment: Qt.AlignHCenter
@@ -73,7 +77,7 @@ ApplicationWindow {
                         validator: IntValidator { bottom: 5; top: 20 }
                     }
 
-    RowLayout {
+            RowLayout {
                     Button {
                         text: "Začít hru"
                         font.pixelSize: 24
@@ -91,8 +95,9 @@ ApplicationWindow {
                             if (mapSize >= 5 && mapSize <= 20) {
                                 mapModel.generate(mapSize)
                                 stack.push(gameScreen)
-                            } else {
-                                messageDialog.text = "Zadej číslo 5–20!"
+                            } else
+                            {
+
                                 messageDialog.open()
                             }
                             console.log("Aktuální velikost mapModel.size:", cellSize)
@@ -113,7 +118,7 @@ ApplicationWindow {
 
                         onClicked:
                         {
-                            console.log("Uživatel ukončil aplikaci z menu")
+                            console.log("KONEC")
                             Qt.quit()
                         }
                     }
@@ -125,6 +130,7 @@ ApplicationWindow {
             id: gameScreen
 
             Item {
+
                 Column {
                     anchors.fill: parent
                     spacing: 10
@@ -136,6 +142,7 @@ ApplicationWindow {
                         width: grid.width
                         height: grid.height
                         anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.horizontalCenter
 
                         GridView {
                             id: grid
@@ -172,7 +179,9 @@ ApplicationWindow {
                             }
                         }
                     }
-                }
+
+            }
+
 
             Button {
                         text: "X"
@@ -190,10 +199,16 @@ ApplicationWindow {
                         }
 
                         onClicked: {
-                            console.log("Aplikace ukončena z menu")
-                            Qt.quit()
+                            console.log("MENU")
+                            stack.pop()
                         }
                     }
             }
         }
+    MessageDialog {
+        id: messageDialog
+        title: "Chyba vstupu"
+        text: "Chyba vstupu"
+
+    }
 }
