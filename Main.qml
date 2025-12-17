@@ -67,14 +67,28 @@ ApplicationWindow {
             Repeater {
                 model: unitModel
 
-                Rectangle {
+                Item {
                     width: grid.cellWidth
                     height: grid.cellHeight
                     x: grid.x + ux * grid.cellWidth
                     y: grid.y + uy * grid.cellHeight
-                    color: "yellow"
-                    radius: 4
                     z: 10
+
+                    Rectangle {
+                        anchors.fill: parent
+                        color: ownerId === 1 ? "gold" : "orange"
+                        radius: 4
+                        border.color: "black"
+                        border.width: 1
+                    }
+
+                    Text {
+                        anchors.centerIn: parent
+                        font.pixelSize: 9
+                        color: "black"
+                        horizontalAlignment: Text.AlignHCenter
+                        text: "HP:" + health + " | ATK:" + attackPower + " | MV:" + moveRange
+                    }
                 }
             }
         }

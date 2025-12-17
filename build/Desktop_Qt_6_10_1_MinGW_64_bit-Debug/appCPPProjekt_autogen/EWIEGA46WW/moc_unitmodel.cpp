@@ -42,11 +42,7 @@ template <> constexpr inline auto UnitModel::qt_create_metaobjectdata<qt_meta_ta
         "addUnit",
         "",
         "x",
-        "y",
-        "Roles",
-        "XRole",
-        "YRole",
-        "TypeRole"
+        "y"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -58,12 +54,6 @@ template <> constexpr inline auto UnitModel::qt_create_metaobjectdata<qt_meta_ta
     QtMocHelpers::UintData qt_properties {
     };
     QtMocHelpers::UintData qt_enums {
-        // enum 'Roles'
-        QtMocHelpers::EnumData<enum Roles>(5, 5, QMC::EnumFlags{}).add({
-            {    6, Roles::XRole },
-            {    7, Roles::YRole },
-            {    8, Roles::TypeRole },
-        }),
     };
     return QtMocHelpers::metaObjectData<UnitModel, qt_meta_tag_ZN9UnitModelE_t>(QMC::MetaObjectFlag{}, qt_stringData,
             qt_methods, qt_properties, qt_enums);

@@ -1,19 +1,19 @@
 {
 	"AUTOGEN_COMMAND_LINE_LENGTH_MAX" : 32000,
-	"BUILD_DIR" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen",
-	"CMAKE_BINARY_DIR" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug",
-	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug",
-	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/yona/Documents/cppProjekt2025",
+	"BUILD_DIR" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen",
+	"CMAKE_BINARY_DIR" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_BINARY_DIR" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug",
+	"CMAKE_CURRENT_SOURCE_DIR" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025",
 	"CMAKE_EXECUTABLE" : "C:/Qt/Tools/CMake_64/bin/cmake.exe",
 	"CMAKE_LIST_FILES" : 
 	[
-		"C:/Users/yona/Documents/cppProjekt2025/CMakeLists.txt",
-		"C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake",
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/CMakeLists.txt",
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDetermineSystem.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystem.cmake.in",
-		"C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake",
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeNinjaFindMake.cmake",
-		"C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qtc/package-manager/maintenance_tool_provider.cmake",
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qtc/package-manager/maintenance_tool_provider.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInitialize.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-Initialize.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDetermineCXXCompiler.cmake",
@@ -66,7 +66,7 @@
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeFindBinUtils.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Compiler/GNU-FindBinUtils.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in",
-		"C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeSystemSpecificInformation.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeGenericSystem.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeInitializeConfigs.cmake",
@@ -81,7 +81,7 @@
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDetermineRCCompiler.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeRCCompiler.cmake.in",
-		"C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake",
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeRCInformation.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-windres.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeTestRCCompiler.cmake",
@@ -98,7 +98,7 @@
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeDetermineCompilerSupport.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Internal/FeatureTesting.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeCXXCompiler.cmake.in",
-		"C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeCXXCompiler.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/Platform/Windows-GNU-CXX-ABI.cmake",
 		"C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6Quick/Qt6QuickConfigVersion.cmake",
 		"C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6Quick/Qt6QuickConfigVersionImpl.cmake",
@@ -944,30 +944,30 @@
 		"C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6/Qt6Dependencies.cmake",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/GNUInstallDirs.cmake",
 		"C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in",
-		"C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/qml_imports/appCPPProjekt_conf.cmake"
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/qml_imports/appCPPProjekt_conf.cmake"
 	],
-	"CMAKE_SOURCE_DIR" : "C:/Users/yona/Documents/cppProjekt2025",
+	"CMAKE_SOURCE_DIR" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025",
 	"CROSS_CONFIG" : false,
-	"DEP_FILE" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/deps",
+	"DEP_FILE" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/deps",
 	"DEP_FILE_RULE_NAME" : "appCPPProjekt_autogen/timestamp",
 	"HEADERS" : 
 	[
 		[
-			"C:/Users/yona/Documents/cppProjekt2025/mapmodel.h",
+			"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/mapmodel.h",
 			"MU",
 			"EWIEGA46WW/moc_mapmodel.cpp",
 			null
 		],
 		[
-			"C:/Users/yona/Documents/cppProjekt2025/unitmodel.h",
+			"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/unitmodel.h",
 			"MU",
 			"EWIEGA46WW/moc_unitmodel.cpp",
 			null
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
-	"INCLUDE_DIR" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/include",
-	"MOC_COMPILATION_FILE" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/mocs_compilation.cpp",
+	"INCLUDE_DIR" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/include",
+	"MOC_COMPILATION_FILE" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/mocs_compilation.cpp",
 	"MOC_DEFINITIONS" : 
 	[
 		"MINGW_HAS_SECURE_API=1",
@@ -1032,31 +1032,43 @@
 		"-c",
 		"C:/Qt/Tools/CMake_64/share/cmake-3.30/Modules/CMakeCXXCompilerABI.cpp"
 	],
-	"MOC_PREDEFS_FILE" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/moc_predefs.h",
+	"MOC_PREDEFS_FILE" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/moc_predefs.h",
 	"MOC_RELAXED_MODE" : false,
 	"MOC_SKIP" : 
 	[
-		"C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_app_resources.cpp"
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_app_resources.cpp"
 	],
 	"MULTI_CONFIG" : false,
-	"PARALLEL" : 8,
-	"PARSE_CACHE_FILE" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/appCPPProjekt_autogen.dir/ParseCache.txt",
+	"PARALLEL" : 6,
+	"PARSE_CACHE_FILE" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/appCPPProjekt_autogen.dir/ParseCache.txt",
 	"QT_MOC_EXECUTABLE" : "C:/Qt/6.10.1/mingw_64/bin/moc.exe",
 	"QT_UIC_EXECUTABLE" : "",
 	"QT_VERSION_MAJOR" : 6,
 	"QT_VERSION_MINOR" : 10,
-	"SETTINGS_FILE" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/appCPPProjekt_autogen.dir/AutogenUsed.txt",
+	"SETTINGS_FILE" : "C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/appCPPProjekt_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
-		[ "C:/Users/yona/Documents/cppProjekt2025/main.cpp", "MU", null ],
-		[ "C:/Users/yona/Documents/cppProjekt2025/mapmodel.cpp", "MU", null ],
-		[ "C:/Users/yona/Documents/cppProjekt2025/unitmodel.cpp", "MU", null ]
+		[
+			"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/main.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/mapmodel.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/unitmodel.cpp",
+			"MU",
+			null
+		]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],
 	"UIC_SKIP" : 
 	[
-		"C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_app_resources.cpp"
+		"C:/Users/Jakub/Desktop/projektCPP/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qrc_app_resources.cpp"
 	],
 	"UIC_UI_FILES" : [],
 	"USE_BETTER_GRAPH" : true,
