@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef MAPMODEL_H
+#define MAPMODEL_H
 #include <QAbstractListModel>
 #include <vector>
 
@@ -38,3 +38,5 @@ private:
     int m_size = 0;
     std::vector<Tile> m_tiles;
 };
+
+#endif // MAPMODEL_H

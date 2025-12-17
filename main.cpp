@@ -3,8 +3,8 @@
 #include <QQmlContext>
 #include <QCoreApplication>
 
-#include "MapModel.h"
-#include "UnitModel.h"
+#include "mapmodel.h"
+#include "unitmodel.h"
 
 int main(int argc, char *argv[])
 {
