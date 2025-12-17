@@ -21,6 +21,7 @@ int main(int argc, char *argv[])
     unitModel.addUnit(1, 1);
     unitModel.addUnit(3, 4);
 
+
     // REGISTRACE DO QML
     engine.rootContext()->setContextProperty("mapModel", &mapModel);
     engine.rootContext()->setContextProperty("unitModel", &unitModel);

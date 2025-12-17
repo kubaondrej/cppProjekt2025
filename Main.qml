@@ -1,82 +1,160 @@
 import QtQuick
 import QtQuick.Controls
-
+import QtQuick 2.15
+import QtQuick.Window 2.15
+import QtQuick.Controls 2.15
+import QtQuick.Layouts 1.15
 ApplicationWindow {
+    id: root
     visible: true
     width: 900
     height: 700
     title: "CPPProjekt – mapa"
-
-    Column {
-        anchors.fill: parent
-        spacing: 10
-        padding: 10
-
-        Row {
-            spacing: 10
-
-            TextField {
-                id: sizeInput
-                width: 160
-                placeholderText: "velikost (např. 10)"
-                text: "10"
-                inputMethodHints: Qt.ImhDigitsOnly
-            }
-
-            Button {
-                text: "Vytvořit mapu"
-                onClicked: mapModel.generate(parseInt(sizeInput.text))
-            }
-
-            Label {
-                text: "Mapa: " + mapModel.size + " × " + mapModel.size
-            }
+    property int currentCellSize: 40
+    StackView {
+            id: stack
+            anchors.fill: parent
+            initialItem: menuScreen
         }
 
-        Item {
-            id: mapArea
-            width: grid.width
-            height: grid.height
-            anchors.horizontalCenter: parent.horizontalCenter
+    Component {
+            id: menuScreen
 
-            // MAPA
-            GridView {
-                id: grid
-                model: mapModel
+            Rectangle {
+                color: "#2c3e50"
 
-                cellWidth: 24
-                cellHeight: 24
+                ColumnLayout {
+                    anchors.centerIn: parent
+                    spacing: 30
 
-                width: mapModel.size * cellWidth
-                height: mapModel.size * cellHeight
-                anchors.centerIn: parent
+                    Text {
+                        text: "Vítej ve strategické hře!"
+                        font.pixelSize: 36
+                        color: "white"
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                delegate: Rectangle {
-                    width: grid.cellWidth
-                    height: grid.cellHeight
-                    border.width: 1
+                    Text {
+                        text: "Zadej velikost mapy (5–20)"
+                        font.pixelSize: 20
+                        color: "#bdc3c7"
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
-                    color: {
-                        if (terrain === 1) return "dodgerblue" // Water
-                        if (terrain === 2) return "gray"       // Mountain
-                        return "lightgreen"                    // Grass
+                    TextField {
+                        id: mapSizeInput
+                        width: 200
+                        height: 50
+                        font.pixelSize: 24
+                        placeholderText: "např. 10"
+                        text: "10"
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        horizontalAlignment: Text.AlignHCenter
+                        Layout.alignment: Qt.AlignHCenter
+
+                        validator: IntValidator { bottom: 5; top: 20 }
+                    }
+
+                    Text {
+                        text: "Zadej velikost políčka"
+                        font.pixelSize: 20
+                        color: "#bdc3c7"
+                        Layout.alignment: Qt.AlignHCenter
+                    }
+                    TextField {
+                        id: cellSizeInput
+                        width: 200
+                        height: 50
+                        font.pixelSize: 24
+                        placeholderText: "např. 10"
+                        text: "10"
+                        inputMethodHints: Qt.ImhDigitsOnly
+                        horizontalAlignment: Text.AlignHCenter
+                        Layout.alignment: Qt.AlignHCenter
+
+                        validator: IntValidator { bottom: 5; top: 20 }
+                    }
+
+
+                    Button {
+                        text: "Začít hru"
+                        font.pixelSize: 24
+                        width: 250
+                        height: 60
+
+                        background: Rectangle {
+                            color: "#27ae60"
+                            radius: 10
+                        }
+
+                        onClicked: {
+                            var mapSize = parseInt(mapSizeInput.text)
+                            root.currentCellSize = parseInt(cellSizeInput.text)
+                            if (mapSize >= 5 && mapSize <= 20) {
+                                mapModel.generate(mapSize)          // zavoláš svou funkci
+                                stack.push(gameScreen)           // přepne na mapu
+                            } else {
+                                messageDialog.text = "Zadej číslo 5–20!"
+                                messageDialog.open()
+                            }
+                            console.log("Aktuální velikost mapModel.size:", cellSize)
+                        }
                     }
                 }
             }
+        }
 
-            Repeater {
-                model: unitModel
+    Component {
+            id: gameScreen
 
-                Rectangle {
-                    width: grid.cellWidth
-                    height: grid.cellHeight
-                    x: grid.x + ux * grid.cellWidth
-                    y: grid.y + uy * grid.cellHeight
-                    color: "yellow"
-                    radius: 4
-                    z: 10
+            Item {
+                Column {
+                    anchors.fill: parent
+                    spacing: 10
+                    padding: 10
+
+
+                    Item {
+                        id: mapArea
+                        width: grid.width
+                        height: grid.height
+                        anchors.horizontalCenter: parent.horizontalCenter
+
+                        GridView {
+                            id: grid
+                            model: mapModel
+                            cellWidth: root.currentCellSize
+                            cellHeight: root.currentCellSize
+                            width: mapModel.size * cellWidth
+                            height: mapModel.size * cellHeight
+                            anchors.centerIn: parent
+
+                            delegate: Rectangle {
+                                width: grid.cellWidth
+                                height: grid.cellHeight
+                                border.width: 1
+                                color: {
+                                    if (terrain === 1) return "dodgerblue"
+                                    else if (terrain === 2) return "gray"
+                                    return "lightgreen"
+                                }
+                            }
+                        }
+
+                        Repeater {
+                            model: unitModel
+                            Rectangle {
+                                width: grid.cellWidth
+                                height: grid.cellHeight
+                                x: grid.x + ux * grid.cellWidth
+                                y: grid.y + uy * grid.cellHeight
+                                color: "yellow"
+                                radius: 4
+                                z: 10
+                            }
+                        }
+                    }
                 }
             }
         }
-    }
 }

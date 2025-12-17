@@ -39,7 +39,8 @@ void MapModel::generate(int n) {
     // demo generování: voda po okrajích, zbytek tráva
     for (int y = 0; y < n; ++y) {
         for (int x = 0; x < n; ++x) {
-            if (x == 0 || y == 0 || x == n - 1 || y == n - 1) {
+            if (x == 0 || y == 0 || x == n - 1 || y == n - 1)
+            {
                 m_tiles[static_cast<size_t>(y * n + x)].terrain = Terrain::Water;
             }
         }
