@@ -4,6 +4,7 @@
 #include <QCoreApplication>
 
 #include "MapModel.h"
+#include "UnitModel.h"
 
 int main(int argc, char *argv[])
 {
@@ -11,9 +12,19 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
+    // MAPA
     MapModel mapModel;
-    mapModel.generate(10); // default 10x10
+    mapModel.generate(10);
+
+    // JEDNOTKY
+    UnitModel unitModel;
+    unitModel.addUnit(1, 1);
+    unitModel.addUnit(3, 4);
+    unitModel.addUnit(7, 2);
+
+    // REGISTRACE DO QML
     engine.rootContext()->setContextProperty("mapModel", &mapModel);
+    engine.rootContext()->setContextProperty("unitModel", &unitModel);
 
     const QUrl url(QStringLiteral("qrc:/Main.qml"));
     QObject::connect(
