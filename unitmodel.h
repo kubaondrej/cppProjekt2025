@@ -63,6 +63,9 @@ public:
         XRole,
         YRole
     };
+    Unit* getUnit(int index) const;
+    void removeUnit(int index);
+    int findUnitIndex(int x, int y) const;
 
     explicit UnitModel(QObject *parent = nullptr);
 

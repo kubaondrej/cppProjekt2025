@@ -15,7 +15,7 @@ qt_standard_project_setup()
 qt_add_executable(appCPPProjekt
     main.cpp
 
-
+    mapmodel.h mapmodel.cpp
     unitmodel.h unitmodel.cpp
     resources.qrc
 
