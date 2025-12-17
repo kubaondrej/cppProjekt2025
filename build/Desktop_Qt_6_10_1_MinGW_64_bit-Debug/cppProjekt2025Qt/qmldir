@@ -1,0 +1,6 @@
+module cppProjekt2025Qt
+typeinfo appcppProjekt2025Qt.qmltypes
+prefer :/qt/qml/cppProjekt2025Qt/
+Main 254.0 Main.qml
+depends QtQuick
+
