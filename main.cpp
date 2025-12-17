@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include <QCoreApplication>
 
-#include "mapmodel.h"
+#include "MapModel.h"
 
 int main(int argc, char *argv[])
 {

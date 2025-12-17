@@ -1,11 +1,11 @@
 -rootPath
-C:/Users/yona/Documents/cppProjekt2025
+C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025
 -cmake-output
 -output-file
-C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/qml_imports/appCPPProjekt_build.cmake
+C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/qml_imports/appCPPProjekt_build.cmake
 -importPath
-C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug
+C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug
 -importPath
 C:/Qt/6.10.1/mingw_64/qml
 -qrcFiles
-C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/app_resources.qrc
+C:/Users/Jakub/Desktop/cppProjekt/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/app_resources.qrc
