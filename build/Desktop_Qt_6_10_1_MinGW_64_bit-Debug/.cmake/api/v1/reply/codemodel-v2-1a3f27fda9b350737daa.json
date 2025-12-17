@@ -45,7 +45,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "appCPPProjekt::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-appCPPProjekt-Debug-61354f5b8f77308f64e5.json",
+					"jsonFile" : "target-appCPPProjekt-Debug-4e3fd0d33340c4321347.json",
 					"name" : "appCPPProjekt",
 					"projectIndex" : 0
 				},
@@ -76,8 +76,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug",
-		"source" : "C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt"
+		"build" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug",
+		"source" : "C:/Users/yona/Documents/cppProjekt2025"
 	},
 	"version" : 
 	{

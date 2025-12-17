@@ -66,7 +66,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 12,
+				"line" : 15,
 				"parent" : 0
 			},
 			{
@@ -90,7 +90,7 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 24,
+				"line" : 27,
 				"parent" : 0
 			},
 			{
@@ -359,7 +359,7 @@
 			{
 				"command" : 20,
 				"file" : 1,
-				"line" : 18,
+				"line" : 21,
 				"parent" : 0
 			},
 			{
@@ -441,6 +441,10 @@
 				},
 				{
 					"backtrace" : 5,
+					"define" : "QT_QUICKCONTROLS2_LIB"
+				},
+				{
+					"backtrace" : 5,
 					"define" : "QT_QUICK_LIB"
 				},
 				{
@@ -472,7 +476,7 @@
 			[
 				{
 					"backtrace" : 0,
-					"path" : "C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/include"
+					"path" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_autogen/include"
 				},
 				{
 					"backtrace" : 29,
@@ -518,6 +522,11 @@
 					"backtrace" : 5,
 					"isSystem" : true,
 					"path" : "C:/Qt/6.10.1/mingw_64/include/QtOpenGL"
+				},
+				{
+					"backtrace" : 5,
+					"isSystem" : true,
+					"path" : "C:/Qt/6.10.1/mingw_64/include/QtQuickControls2"
 				}
 			],
 			"language" : "CXX",
@@ -546,11 +555,11 @@
 			"id" : "appCPPProjekt_autogen::@6890427a1f51a3e7e1df"
 		},
 		{
-			"backtrace" : 53,
-			"id" : "appCPPProjekt_qmlimportscan::@6890427a1f51a3e7e1df"
+			"id" : "appCPPProjekt_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		},
 		{
-			"id" : "appCPPProjekt_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
+			"backtrace" : 53,
+			"id" : "appCPPProjekt_qmlimportscan::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "appCPPProjekt::@6890427a1f51a3e7e1df",
@@ -568,12 +577,22 @@
 			},
 			{
 				"backtrace" : 5,
+				"fragment" : "C:\\Qt\\6.10.1\\mingw_64\\lib\\libQt6QuickControls2.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 5,
 				"fragment" : "C:\\Qt\\6.10.1\\mingw_64\\lib\\libQt6Quick.a",
 				"role" : "libraries"
 			},
 			{
 				"backtrace" : 11,
 				"fragment" : "C:\\Qt\\6.10.1\\mingw_64\\lib\\libQt6OpenGL.a",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 11,
+				"fragment" : "-luser32",
 				"role" : "libraries"
 			},
 			{
@@ -599,11 +618,6 @@
 			{
 				"backtrace" : 21,
 				"fragment" : "-ld3d12",
-				"role" : "libraries"
-			},
-			{
-				"backtrace" : 11,
-				"fragment" : "-luser32",
 				"role" : "libraries"
 			},
 			{

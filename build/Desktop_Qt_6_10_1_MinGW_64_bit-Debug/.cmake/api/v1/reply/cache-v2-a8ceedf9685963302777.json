@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "c:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug"
+			"value" : "c:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -479,7 +479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/pkgRedirects"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -563,7 +563,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025"
 		},
 		{
 			"name" : "CMAKE_INSTALL_BINDIR",
@@ -1063,7 +1063,7 @@
 				}
 			],
 			"type" : "FILEPATH",
-			"value" : "C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qtc/package-manager/auto-setup.cmake"
 		},
 		{
 			"name" : "CMAKE_PROJECT_NAME",
@@ -1076,66 +1076,6 @@
 			],
 			"type" : "STATIC",
 			"value" : "CPPProjekt"
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "0.1"
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION_MAJOR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "0"
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION_MINOR",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : "1"
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION_PATCH",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : ""
-		},
-		{
-			"name" : "CMAKE_PROJECT_VERSION_TWEAK",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Value Computed by CMake"
-				}
-			],
-			"type" : "STATIC",
-			"value" : ""
 		},
 		{
 			"name" : "CMAKE_RANLIB",
@@ -1539,7 +1479,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug"
 		},
 		{
 			"name" : "CPPProjekt_IS_TOP_LEVEL",
@@ -1563,7 +1503,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025"
 		},
 		{
 			"name" : "HAVE_STDATOMIC",
@@ -4806,6 +4746,162 @@
 			"value" : "ON"
 		},
 		{
+			"name" : "QT_FEATURE_quickcontrols2_basic",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quickcontrols2_basic (from target Qt6::QuickControls2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quickcontrols2_fluentwinui3",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quickcontrols2_fluentwinui3 (from target Qt6::QuickControls2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quickcontrols2_fusion",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quickcontrols2_fusion (from target Qt6::QuickControls2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quickcontrols2_imagine",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quickcontrols2_imagine (from target Qt6::QuickControls2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quickcontrols2_ios",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quickcontrols2_ios (from target Qt6::QuickControls2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "QT_FEATURE_quickcontrols2_macos",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quickcontrols2_macos (from target Qt6::QuickControls2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "OFF"
+		},
+		{
+			"name" : "QT_FEATURE_quickcontrols2_material",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quickcontrols2_material (from target Qt6::QuickControls2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quickcontrols2_universal",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quickcontrols2_universal (from target Qt6::QuickControls2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quickcontrols2_windows",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quickcontrols2_windows (from target Qt6::QuickControls2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quicktemplates2_calendar",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quicktemplates2_calendar (from target Qt6::QuickTemplates2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quicktemplates2_container",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quicktemplates2_container (from target Qt6::QuickTemplates2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quicktemplates2_hover",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quicktemplates2_hover (from target Qt6::QuickTemplates2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
+			"name" : "QT_FEATURE_quicktemplates2_multitouch",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "Qt feature: quicktemplates2_multitouch (from target Qt6::QuickTemplates2)"
+				}
+			],
+			"type" : "INTERNAL",
+			"value" : "ON"
+		},
+		{
 			"name" : "QT_FEATURE_raster_64bit",
 			"properties" : 
 			[
@@ -6483,7 +6579,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/bin/qt_setup_tool_path.bat"
+			"value" : "C:/Users/yona/Documents/cppProjekt2025/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/bin/qt_setup_tool_path.bat"
 		},
 		{
 			"name" : "Qt6Concurrent_DIR",
@@ -6688,6 +6784,30 @@
 			],
 			"type" : "PATH",
 			"value" : "C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6Qml"
+		},
+		{
+			"name" : "Qt6QuickControls2_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Qt6QuickControls2."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6QuickControls2"
+		},
+		{
+			"name" : "Qt6QuickTemplates2_DIR",
+			"properties" : 
+			[
+				{
+					"name" : "HELPSTRING",
+					"value" : "The directory containing a CMake configuration file for Qt6QuickTemplates2."
+				}
+			],
+			"type" : "PATH",
+			"value" : "C:/Qt/6.10.1/mingw_64/lib/cmake/Qt6QuickTemplates2"
 		},
 		{
 			"name" : "Qt6QuickTools_DIR",
