@@ -9,7 +9,7 @@ ApplicationWindow {
     id: root
     visible: true
     width: 1000
-    height: 700
+    height: 800
     title: "CPPProjekt – mapa"
     property int currentCellSize: 40
     StackView {
@@ -69,7 +69,7 @@ ApplicationWindow {
                         width: 200
                         height: 50
                         font.pixelSize: 24
-                        text: "45"
+                        text: "50"
                         inputMethodHints: Qt.ImhDigitsOnly
                         horizontalAlignment: Text.AlignHCenter
                         Layout.alignment: Qt.AlignHCenter
@@ -163,6 +163,29 @@ ApplicationWindow {
                                     else if (terrain === 2) return "gray"
                                     return "lightgreen"
                                 }
+                                MouseArea {
+                                        anchors.fill: parent
+                                        hoverEnabled: true  // pro budoucí hover efekty
+
+                                        onClicked: {
+                                            // Výpočet souřadnic z indexu v modelu
+                                            var col = index % mapModel.size          // x souřadnice (sloupec)
+                                            var row = Math.floor(index / mapModel.size)  // y souřadnice (řádek)
+
+                                            console.log("Kliknuto na políčko: [" + col + ", " + row + "]")
+                                            console.log("Typ terénu:", model.terrain)
+                                            console.log("Index v modelu:", index)
+                                            unitModel.addUnit(col, row)
+                                            // Zde později budeš volat C++ funkci nebo přidávat jednotku
+                                            // např. unitModel.addUnit(col, row, 1)  // 1 = typ jednotky
+                                        }
+
+                                        // Volitelný hover efekt – políčko se zvýrazní
+                                        onEntered:{ parent.border.color = "yellow"
+                                                    parent.border.width = 3}
+                                        onExited:{ parent.border.width = 1
+                                                    parent.border.color = "black"}
+                                    }
                             }
                         }
 
@@ -176,7 +199,15 @@ ApplicationWindow {
                                 color: "yellow"
                                 radius: 4
                                 z: 10
+
+                                Rectangle{
+                                    anchors.centerIn: parent
+                                    width: grid.cellHeight-grid.cellHeight/2
+                                    height: grid.cellWidth-grid.cellWidth/2
+                                }
                             }
+
+
                         }
                     }
 

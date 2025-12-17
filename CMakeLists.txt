@@ -17,6 +17,7 @@ qt_add_executable(appCPPProjekt
     mapmodel.cpp
     mapmodel.h
     unitmodel.h unitmodel.cpp
+    resources.qrc
 
 
 )
