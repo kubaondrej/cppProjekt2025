@@ -1,4 +1,3 @@
-@@ -1,30 +0,0 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(CPPProjekt LANGUAGES CXX)
