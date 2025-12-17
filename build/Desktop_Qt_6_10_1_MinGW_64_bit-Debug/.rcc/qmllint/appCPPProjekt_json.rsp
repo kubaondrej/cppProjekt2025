@@ -1,0 +1,14 @@
+--bare
+-I
+C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug
+-I
+C:/Qt/6.10.1/mingw_64/qml
+--resource
+C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/qmake_CPPProjekt.qrc
+--resource
+C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/appCPPProjekt_raw_qml_0.qrc
+--resource
+C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/.qt/rcc/appCPPProjekt_raw_res_0.qrc
+C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/Main.qml
+--json
+C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/build/Desktop_Qt_6_10_1_MinGW_64_bit-Debug/appCPPProjekt_qmllint.json

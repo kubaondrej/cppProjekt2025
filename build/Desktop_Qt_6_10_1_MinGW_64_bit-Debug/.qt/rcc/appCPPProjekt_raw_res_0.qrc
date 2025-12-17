@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qt/qml/CPPProjekt/">
+    <file alias="resources.qrc">C:/Users/Micha/OneDrive/Dokumenty/CPPProjekt/resources.qrc</file>
+  </qresource>
+</RCC>
+
