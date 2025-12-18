@@ -4,13 +4,13 @@
 GameController::GameController(UnitModel *units, MapModel *map, QObject *parent)
     : QObject(parent), m_units(units), m_map(map)
 {
-    m_statusMessage = "Fáze rozmísťování: Hráč 1";
+    m_statusMessage = "rozmistuje hrac 1";
 }
 
 void GameController::handleTileClick(int x, int y) {
     if (m_isPlacementPhase) {
         if (m_units->findUnitIndex(x, y) != -1) {
-            m_statusMessage = "Políčko obsazeno!";
+            m_statusMessage = "policko je obsazene";
             emit statusChanged();
             return;
         }
@@ -23,7 +23,7 @@ void GameController::handleTileClick(int x, int y) {
         if (m_p1PlacedCount >= MAX_UNITS && m_p2PlacedCount >= MAX_UNITS) {
             m_isPlacementPhase = false;
             m_currentPlayer = 1;
-            m_statusMessage = "BOJ ZAČÍNÁ! Na tahu Hráč 1";
+            m_statusMessage = "valka zacina";
             emit phaseChanged();
             emit turnChanged();
             emit statusChanged();
@@ -41,7 +41,7 @@ void GameController::handleTileClick(int x, int y) {
             Unit* u = m_units->getUnit(clickedUnitIdx);
             if (u->m_ownerId == m_currentPlayer) {
                 m_selectedUnitIndex = clickedUnitIdx;
-                m_statusMessage = "Vybrána jednotka. Klikni pro pohyb nebo útok.";
+                m_statusMessage = "vybrana jednotka. Klikni pro utok";
                 emit statusChanged();
             }
         }
@@ -70,7 +70,7 @@ void GameController::moveUnit(int unitIdx, int x, int y) {
         m_selectedUnitIndex = -1;
         endTurn();
     } else {
-        m_statusMessage = "Moc daleko!";
+        m_statusMessage = "neni dosah";
         emit statusChanged();
     }
 }
@@ -80,14 +80,14 @@ void GameController::attackUnit(int attackerIdx, int targetIdx) {
     Unit* target = m_units->getUnit(targetIdx);
     int dist = std::abs(attacker->m_ux - target->m_ux) + std::abs(attacker->m_uy - target->m_uy);
 
-    if (dist <= 1) {
+    if (dist <= 2) {
         int newHealth = target->m_health - attacker->m_attackPower;
         m_units->updateHealth(targetIdx, newHealth);
-        m_statusMessage = "Útok úspěšný!";
+        m_statusMessage = "utok uspech";
 
         if (target->m_health <= 0) {
             m_units->removeUnit(targetIdx);
-            m_statusMessage = "Jednotka zničena!";
+            m_statusMessage = "bum!!! jednotka znicena";
             checkWinCondition();
         }
 
@@ -98,16 +98,16 @@ void GameController::attackUnit(int attackerIdx, int targetIdx) {
             endTurn();
         }
     } else {
-        m_statusMessage = "Cíl je mimo dosah!";
+        m_statusMessage = "cil je mimo dosah";
         emit statusChanged();
     }
 }
 
 void GameController::checkWinCondition() {
     if (!m_units->hasUnits(1)) {
-        emit gameOver("Hráč 2 VÍTĚZÍ!");
+        emit gameOver("hrac 2 vyhral");
     } else if (!m_units->hasUnits(2)) {
-        emit gameOver("Hráč 1 VÍTĚZÍ!");
+        emit gameOver("hrac 1 vyhral");
     }
 }
 
@@ -115,7 +115,7 @@ void GameController::endTurn() {
     m_currentPlayer = (m_currentPlayer == 1 ? 2 : 1);
 
     if (m_isPlacementPhase) {
-        m_statusMessage = QString("Rozmísťování: Hráč %1 (zbývá %2)")
+        m_statusMessage = QString("rozmistovani: hrac %1 (zbyva %2)")
                               .arg(m_currentPlayer)
                               .arg(MAX_UNITS - (m_currentPlayer == 1 ? m_p1PlacedCount : m_p2PlacedCount));
     } else {
@@ -131,7 +131,7 @@ void GameController::restartGame() {
     m_p2PlacedCount = 0;
     m_isPlacementPhase = true;
     m_currentPlayer = 1;
-    m_statusMessage = "Nová hra: Rozmísťování Hráč 1";
+    m_statusMessage = "nova hra, rozmistuje hrac 1";
     emit statusChanged();
     emit phaseChanged();
 }

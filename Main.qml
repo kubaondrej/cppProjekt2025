@@ -9,10 +9,10 @@ import QtQuick.Dialogs
 ApplicationWindow {
     id: root
     visible: true
-    width: 1000
-    height: 800
+    width: 1920
+    height: 1080
     title: "CPPProjekt – mapa"
-    property int currentCellSize: 40
+    property int currentCellSize: 100
 
     StackView {
         id: stack
@@ -43,7 +43,6 @@ ApplicationWindow {
         }
     }
 
-    // --- MENU ---
     Component {
         id: menuScreen
         Rectangle {
@@ -94,7 +93,7 @@ ApplicationWindow {
                     width: 200
                     height: 50
                     font.pixelSize: 24
-                    text: "50"
+                    text: "100"
                     inputMethodHints: Qt.ImhDigitsOnly
                     horizontalAlignment: Text.AlignHCenter
                     Layout.alignment: Qt.AlignHCenter
@@ -146,7 +145,6 @@ ApplicationWindow {
         }
     }
 
-    // --- HRA ---
     Component {
         id: gameScreen
         Item {
@@ -173,7 +171,7 @@ ApplicationWindow {
                     Rectangle {
                         width: 30; height: 30
                         radius: 15
-                        color: gameController.currentPlayer === 1 ? "#3498db" : "#e74c3c"
+                        color: gameController.currentPlayer === 1 ? "blue" : "red"
                         border.color: "white"
                         border.width: 2
                     }
@@ -200,14 +198,13 @@ ApplicationWindow {
                         cellHeight: root.currentCellSize
                         width: mapModel.size * cellWidth
                         height: mapModel.size * cellHeight
-
+                        //teren cella
                         delegate: Rectangle {
                             width: grid.cellWidth
                             height: grid.cellHeight
                             border.width: 1
                             border.color: rgba(1,1,1,0.1)
-                            color: terrain === 1 ? "dodgerblue" : "lightgreen"
-
+                            color: terrain === 1 ? "blue" : "green"
                             MouseArea {
                                 anchors.fill: parent
                                 hoverEnabled: true
@@ -217,7 +214,10 @@ ApplicationWindow {
                                     var col = index % mapModel.size
                                     var row = Math.floor(index / mapModel.size)
                                     console.log("Klik: [" + col + ", " + row + "]")
-                                    gameController.handleTileClick(col, row)
+                                    if(terrain!==1)
+                                    {
+                                        gameController.handleTileClick(col, row)
+                                                                        }
                                 }
                                 onEntered: {
                                     parent.border.color = "yellow"
@@ -227,11 +227,20 @@ ApplicationWindow {
                                     parent.border.width = 1
                                     parent.border.color = "rgba(0,0,0,0.1)"
                                 }
+
+                                Image {
+                                    id: terrainImg
+                                    source: terrain === 1 ? "qrc:/Images/water.png" : "qrc:/Images/grass.png"
+                                    anchors.centerIn: parent
+                                    width: grid.cellWidth
+                                    height: grid.cellHeight
+                                }
                             }
                         }
 
                         Repeater {
                             model: unitModel
+                            //vojáci
                             Rectangle {
                                 id: unitRect
                                 width: grid.cellWidth * 0.8
@@ -242,13 +251,27 @@ ApplicationWindow {
                                 y: grid.y + uy * grid.cellHeight + (grid.cellHeight * 0.1)
                                 z: 10
 
-                                color: ownerId === 1 ? "#3498db" : "#e74c3c"
+                                color: ownerId === 1 ? "blue" : "red"
+                                border.width: index === gameController.selectedUnitIndex ? 6 : 0
+                                border.color: "yellow"
 
-                                border.color: "white"
-                                border.width: 2
-
+                                Image {
+                                        id: soldier
+                                        anchors.centerIn: parent
+                                        width: parent.width * 0.8
+                                        height: parent.height * 0.8
+                                        fillMode: Image.PreserveAspectFit
+                                        visible: true
+                                        source: "qrc:/Images/soldier.png"
+                                    }
+                                Text{
+                                    text:"hp"
+                                    anchors.centerIn: parent.top
+                                    color: "white"
+                                    font.bold: true
+                                    font.pixelSize: parent.width * 0.4}
                                 Text {
-                                    anchors.centerIn: parent
+                                    anchors.bottom: parent.bottom
                                     text: health
                                     color: "white"
                                     font.bold: true
@@ -268,7 +291,7 @@ ApplicationWindow {
                 anchors.bottom: parent.bottom
                 anchors.margins: 30
                 background: Rectangle {
-                    color: "#e74c3c"
+                    color: "red"
                     radius: 25
                     opacity: 0.8
                 }
