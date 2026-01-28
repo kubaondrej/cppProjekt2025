@@ -184,14 +184,14 @@ ApplicationWindow {
                                 color: "#888";
                                 font.pixelSize: 20
                             }
-                            /*Rectangle {
+                            Rectangle {
                                 anchors.fill: parent
                                 z: 5
                                 color: "transparent"
                                 border.color: highlight === 1 ? "#00ff00" :
                                               highlight === 2 ? "#ff0000" : "transparent"
                                 border.width: highlight > 0 ? 3 : 0
-                            }*/
+                            }
 
                             TapHandler {
                                 onTapped: gameController.handleTileClick(index % mapModel.size, Math.floor(index / mapModel.size))

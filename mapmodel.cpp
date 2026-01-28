@@ -1,4 +1,4 @@
-#include "MapModel.h"
+#include "mapmodel.h"
 #include <QRandomGenerator>
 
 MapModel::MapModel(QObject* parent)
@@ -22,13 +22,17 @@ QVariant MapModel::data(const QModelIndex& index, int role) const {
     if (role == TerrainRole) {
         return static_cast<int>(tile.terrain);
     }
+    if (role == HighlightRole) {
+        return tile.highlight;
+    }
 
     return {};
 }
 
 QHash<int, QByteArray> MapModel::roleNames() const {
     return {
-        { TerrainRole, "terrain" }
+        { TerrainRole, "terrain" },
+        { HighlightRole, "highlight" }
     };
 }
 
@@ -83,5 +87,3 @@ void MapModel::clearHighlights() {
     }
     emit dataChanged(createIndex(0, 0), createIndex(m_tiles.size()-1, 0), {HighlightRole});
 }
-
-
