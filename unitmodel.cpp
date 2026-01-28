@@ -5,6 +5,49 @@ UnitModel::UnitModel(QObject *parent)
 {
 }
 
+Unit::Unit(UnitType type, int ownerId, int ux, int uy, QObject *parent)
+    : QObject(parent), m_type(type), m_typeInt(static_cast<int>(type)), m_ownerId(ownerId), m_ux(ux), m_uy(uy)
+{
+    switch (type) {
+    case UnitType::Soldier:
+        m_name = "Voják";
+        m_maxHealth = 50; m_attackPower = 15; m_moveRange = 3; m_attackRange = 1;
+        m_isBuilding = false;
+        break;
+    case UnitType::Sniper:
+        m_name = "Sniper";
+        m_maxHealth = 20; m_attackPower = 40; m_moveRange = 2; m_attackRange = 4;
+        m_isBuilding = false;
+        break;
+    case UnitType::Tank:
+        m_name = "Tank";
+        m_maxHealth = 120; m_attackPower = 30; m_moveRange = 3; m_attackRange = 2;
+        m_isBuilding = false;
+        break;
+    case UnitType::Ship:
+        m_name = "Loď";
+        m_maxHealth = 80; m_attackPower = 25; m_moveRange = 4; m_attackRange = 3;
+        m_isBuilding = false;
+        break;
+    case UnitType::MainBase:
+        m_name = "Základna";
+        m_maxHealth = 500; m_attackPower = 0; m_moveRange = 0; m_attackRange = 0;
+        m_isBuilding = true;
+        break;
+    case UnitType::GoldMine:
+        m_name = "Důl";
+        m_maxHealth = 100; m_attackPower = 0; m_moveRange = 0; m_attackRange = 0;
+        m_isBuilding = true;
+        break;
+    }
+    m_health = m_maxHealth;
+}
+
+
+
+
+
+
 int UnitModel::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid())

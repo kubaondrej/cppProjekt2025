@@ -4,48 +4,53 @@
 #include <QAbstractListModel>
 #include <QObject>
 
+
+enum class UnitType {
+    Soldier,
+    Sniper,
+    Tank,
+    Ship,
+    MainBase,
+    GoldMine
+};
+
+
 class Unit : public QObject {
     Q_OBJECT
 
     Q_PROPERTY(QString name MEMBER m_name CONSTANT)
     Q_PROPERTY(int health MEMBER m_health NOTIFY healthChanged)
+    Q_PROPERTY(int maxHealth MEMBER m_maxHealth CONSTANT)
     Q_PROPERTY(int ownerId MEMBER m_ownerId CONSTANT)
     Q_PROPERTY(int moveRange MEMBER m_moveRange CONSTANT)
     Q_PROPERTY(int attackPower MEMBER m_attackPower CONSTANT)
-
+    Q_PROPERTY(int attackRange MEMBER m_attackRange CONSTANT)
     Q_PROPERTY(int ux MEMBER m_ux NOTIFY positionChanged)
     Q_PROPERTY(int uy MEMBER m_uy NOTIFY positionChanged)
+    Q_PROPERTY(int type MEMBER m_typeInt CONSTANT)
+
 
 public:
-    explicit Unit(QString name,
-                  int ownerId,
-                  int moveRange,
-                  int attackPower,
-                  int ux,
-                  int uy,
-                  QObject *parent = nullptr)
-        : QObject(parent),
-        m_name(name),
-        m_ownerId(ownerId),
-        m_health(100),
-        m_moveRange(moveRange),
-        m_attackPower(attackPower),
-        m_ux(ux),
-        m_uy(uy)
-    {}
+    explicit Unit(UnitType type, int ownerId, int ux, int uy, QObject *parent = nullptr);
 
 signals:
     void healthChanged();
     void positionChanged();
 
 public:
+public:
+    UnitType m_type;
+    int m_typeInt;
     QString m_name;
     int m_ownerId;
     int m_health;
+    int m_maxHealth;
     int m_moveRange;
     int m_attackPower;
+    int m_attackRange;
     int m_ux;
     int m_uy;
+    bool m_isBuilding;
 };
 
 
