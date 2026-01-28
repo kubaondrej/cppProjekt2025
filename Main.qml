@@ -9,10 +9,10 @@ import QtQuick.Dialogs
 ApplicationWindow {
     id: root
     visible: true
-    width: 1920
-    height: 1080
-    title: "CPPProjekt – mapa"
-    property int currentCellSize: 100
+    width: 1280
+    height: 900
+    title: "PCP Projekt C&C hra"
+    property int currentCellSize: 60
 
     StackView {
         id: stack
@@ -22,8 +22,8 @@ ApplicationWindow {
 
     MessageDialog {
         id: messageDialog
-        title: "Chyba vstupu"
-        text: "Zadejte platná čísla (Mapa: 5-20)."
+        title: "Info"
+        text: "Zadejte velikost mapy (10-30)."
     }
 
     MessageDialog {
@@ -56,48 +56,19 @@ ApplicationWindow {
                 spacing: 30
 
                 Text {
-                    text: "Tanky a lodě"
-                    font.pixelSize: 36
+                    text: "C&C - Tanky a lodě"
+                    font.pixelSize: 48
                     color: "white"
-                    Layout.alignment: Qt.AlignHCenter
-                }
-
-                Text {
-                    text: "Zadej velikost mapy (5–20)"
-                    font.pixelSize: 20
-                    color: "#bdc3c7"
+                    font.bold: true
                     Layout.alignment: Qt.AlignHCenter
                 }
 
                 TextField {
                     id: mapSizeInput
-                    width: 200
-                    height: 50
-                    font.pixelSize: 24
-                    text: "10"
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    horizontalAlignment: Text.AlignHCenter
+                    placeholderText: "Velikost (10-30)"
+                    text: "15"
+                    color: "black"
                     Layout.alignment: Qt.AlignHCenter
-                    validator: IntValidator { bottom: 5; top: 20 }
-                }
-
-                Text {
-                    text: "Zadej velikost políčka"
-                    font.pixelSize: 20
-                    color: "#bdc3c7"
-                    Layout.alignment: Qt.AlignHCenter
-                }
-
-                TextField {
-                    id: cellSizeInput
-                    width: 200
-                    height: 50
-                    font.pixelSize: 24
-                    text: "100"
-                    inputMethodHints: Qt.ImhDigitsOnly
-                    horizontalAlignment: Text.AlignHCenter
-                    Layout.alignment: Qt.AlignHCenter
-                    validator: IntValidator { bottom: 20; top: 100 }
                 }
 
                 RowLayout {
@@ -115,7 +86,6 @@ ApplicationWindow {
 
                         onClicked: {
                             var mapSize = parseInt(mapSizeInput.text)
-                            root.currentCellSize = parseInt(cellSizeInput.text)
 
                             if (mapSize >= 5 && mapSize <= 20) {
                                 mapModel.generate(mapSize)
