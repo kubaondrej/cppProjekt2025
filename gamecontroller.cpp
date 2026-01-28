@@ -8,55 +8,83 @@ GameController::GameController(UnitModel *units, MapModel *map, QObject *parent)
 }
 
 void GameController::handleTileClick(int x, int y) {
-    if (m_isPlacementPhase) {
-        if (m_units->findUnitIndex(x, y) != -1) {
-            m_statusMessage = "policko je obsazene";
-            emit statusChanged();
-            return;
-        }
-
-
-        if (m_currentPlayer == 1) m_p1PlacedCount++;
-        else m_p2PlacedCount++;
-
-        if (m_p1PlacedCount >= MAX_UNITS && m_p2PlacedCount >= MAX_UNITS) {
-            m_isPlacementPhase = false;
-            m_currentPlayer = 1;
-            m_statusMessage = "valka zacina";
-            emit phaseChanged();
-            emit turnChanged();
-            emit statusChanged();
-            return;
-        }
-
-        endTurn();
+    if (m_phase == GamePhase::BasePlacement) {
+        handleBasePlacement(x, y);
         return;
     }
 
-    int clickedUnitIdx = m_units->findUnitIndex(x, y);
-
-    if (m_selectedUnitIndex == -1) {
-        if (clickedUnitIdx != -1) {
-            Unit* u = m_units->getUnit(clickedUnitIdx);
-            if (u->m_ownerId == m_currentPlayer) {
-                m_selectedUnitIndex = clickedUnitIdx;
-                m_statusMessage = "vybrana jednotka. Klikni pro utok";
-                emit statusChanged();
-            }
-        }
+    if (m_phase == GamePhase::UnitPurchase) {
+        if (!m_isBuyingActive) return;
+        handleUnitPurchasePlacement(x, y);
         return;
     }
 
-    if (clickedUnitIdx != -1) {
-        Unit* clickedUnit = m_units->getUnit(clickedUnitIdx);
-        if (clickedUnit->m_ownerId == m_currentPlayer) {
-            m_selectedUnitIndex = clickedUnitIdx;
+    if (m_phase == GamePhase::Combat) {
+        if (m_isBuyingActive) {
+            handleUnitPurchasePlacement(x, y);
         } else {
-            attackUnit(m_selectedUnitIndex, clickedUnitIdx);
+            handleCombatPhaseClick(x, y);
         }
-    } else {
-        moveUnit(m_selectedUnitIndex, x, y);
     }
+}
+
+void GameController::handleBasePlacement(int x, int y) {
+    if (!canPlaceOnTerrain(UnitType::MainBase, x, y)) {
+        m_statusMessage = "Sem nelze postavit základnu (Jen tráva)!";
+        emit statusChanged();
+        return;
+    }
+    if (m_units->findUnitIndex(x, y) != -1) return;
+
+    m_units->addUnit(x, y, m_currentPlayer, UnitType::MainBase);
+
+    if (m_currentPlayer == 1) {
+        m_currentPlayer = 2;
+        m_statusMessage = "Hráč 2: Umísti Hlavní Budovu";
+    } else {
+        switchPhase(GamePhase::UnitPurchase);
+        return;
+    }
+    emit turnChanged();
+    emit statusChanged();
+}
+
+void GameController::handleUnitPurchasePlacement(int x, int y) {
+    int &currentGold = (m_currentPlayer == 1 ? m_p1Gold : m_p2Gold);
+    int cost = UnitModel::getUnitCost(m_selectedBuyType);
+
+    if (currentGold < cost) {
+        m_statusMessage = "Nedostatek zlata!";
+        emit statusChanged();
+        return;
+    }
+
+    if (!canPlaceOnTerrain(m_selectedBuyType, x, y)) {
+        m_statusMessage = "Nevhodný terén!";
+        emit statusChanged();
+        return;
+    }
+
+    if (m_units->findUnitIndex(x, y) != -1) return;
+
+
+
+    m_units->addUnit(x, y, m_currentPlayer, m_selectedBuyType);
+    currentGold -= cost;
+    emit goldChanged();
+
+    if (m_phase == GamePhase::UnitPurchase) {
+        m_statusMessage = QString("Hráč %1: Pokládá %2").arg(m_currentPlayer).arg(UnitModel::getUnitName(m_selectedBuyType));
+    } else {
+        m_isBuyingActive = false;
+        m_isShopOpen = false;
+        endTurn();
+    }
+    emit statusChanged();
+}
+
+void GameController::handleCombatPhaseClick(int x, int y) {
+//TODO
 }
 
 void GameController::moveUnit(int unitIdx, int x, int y) {

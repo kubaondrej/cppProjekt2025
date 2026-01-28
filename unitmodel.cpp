@@ -44,7 +44,17 @@ Unit::Unit(UnitType type, int ownerId, int ux, int uy, QObject *parent)
 }
 
 
-
+int UnitModel::getUnitCost(UnitType type) {
+    switch (type) {
+    case UnitType::Soldier: return 100;
+    case UnitType::Sniper: return 200;
+    case UnitType::Tank: return 400;
+    case UnitType::Ship: return 350;
+    case UnitType::GoldMine: return 300;
+    case UnitType::MainBase: return 0;
+    default: return 9999;
+    }
+}
 
 
 
@@ -88,8 +98,7 @@ QHash<int, QByteArray> UnitModel::roleNames() const
     return roles;
 }
 //uz nevim co saskarna :(
-void UnitModel::addUnit(int x, int y, int ownerId, UnitType type)
-{
+void UnitModel::addUnit(int x, int y, int ownerId, UnitType type) {
     beginInsertRows(QModelIndex(), m_units.size(), m_units.size());
     m_units.append(new Unit(type, ownerId, x, y, this));
     endInsertRows();

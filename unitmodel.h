@@ -68,8 +68,6 @@ public:
         XRole,
         YRole
     };
-    Q_INVOKABLE void updatePosition(int index, int x, int y);
-    Q_INVOKABLE void updateHealth(int index, int health);
 
     explicit UnitModel(QObject *parent = nullptr);
 
@@ -78,10 +76,19 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     void addUnit(int x, int y, int ownerId, UnitType type);
+
     bool hasUnits(int ownerId) const;
     Unit* getUnit(int index) const;
     void removeUnit(int index);
     int findUnitIndex(int x, int y) const;
+
+    Q_INVOKABLE void updatePosition(int index, int x, int y);
+    Q_INVOKABLE void updateHealth(int index, int health);
+
+    static int getUnitCost(UnitType type);
+    static QString getUnitName(UnitType type);
+    void clear();
+private:
 private:
     QList<Unit*> m_units;
 };
