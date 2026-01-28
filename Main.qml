@@ -56,8 +56,7 @@ ApplicationWindow {
     Component {
         id: menuScreen
         Rectangle {
-            color: "#1f1f1f"
-            border.color: "#00173b"
+            color: "grey"
             border.width: 20
             radius: 15
 
@@ -76,8 +75,7 @@ ApplicationWindow {
                 TextField {
                     id: mapSizeInput
                     placeholderText: "Velikost (10-30)"
-                    text: "15"
-                    color: "black"
+                    color: "white"
                     Layout.alignment: Qt.AlignHCenter
                 }
 
@@ -90,7 +88,7 @@ ApplicationWindow {
                         Layout.preferredWidth: 200
                         Layout.preferredHeight: 60
                         background: Rectangle {
-                            color: "#27ae60"
+                            color: "green"
                             radius: 10
                         }
 
@@ -112,7 +110,7 @@ ApplicationWindow {
                         Layout.preferredWidth: 200
                         Layout.preferredHeight: 60
                         background: Rectangle {
-                            color: "#e74c3c"
+                            color: "red"
                             radius: 10
                         }
 
@@ -131,8 +129,8 @@ ApplicationWindow {
             Rectangle {
                 id: topBar
                 width: parent.width
-                height: 60
-                color: "#222"
+                height: 50
+                color: "grey"
 
                 RowLayout {
                     anchors.fill: parent
@@ -140,7 +138,7 @@ ApplicationWindow {
                     anchors.rightMargin: 60
                     Text {
                         text: gameController.statusMessage
-                        color: "#00ffcc"
+                        color: "black"
                         font.pixelSize: 18
                         font.bold: true
                         Layout.fillWidth: true
@@ -221,7 +219,7 @@ ApplicationWindow {
                 anchors.bottom: parent.bottom
                 width: parent.width
                 height: 40
-                color: "#222"
+                color: "grey"
                 Text {
                     anchors.centerIn: parent
                     text: "ESC / X pro menu"
@@ -236,7 +234,10 @@ ApplicationWindow {
                 width: 30
                 height: 30
                 onClicked: stack.pop()
-                background: Rectangle { color: "red"; radius: 20 }
+                background: Rectangle {
+                    color: "red";
+                    radius: 10
+                }
                 anchors.margins: 10
             }
 
