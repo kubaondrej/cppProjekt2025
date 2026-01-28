@@ -94,31 +94,24 @@ void UnitModel::addUnit(int x, int y, int ownerId, UnitType type)
     m_units.append(new Unit(type, ownerId, x, y, this));
     endInsertRows();
 }
-
 bool UnitModel::hasUnits(int ownerId) const {
-    for (const auto* unit : m_units) {
-        if (unit->m_ownerId == ownerId) return true;
-    }
+    for (const auto* unit : m_units) if (unit->m_ownerId == ownerId) return true;
     return false;
 }
 
 Unit* UnitModel::getUnit(int index) const {
-    if (index < 0 || index >= m_units.size()) return nullptr;
-    return m_units[index];
+    return (index < 0 || index >= m_units.size()) ? nullptr : m_units[index];
 }
 
 int UnitModel::findUnitIndex(int x, int y) const {
-    for (int i = 0; i < m_units.size(); ++i) {
-        if (m_units[i]->m_ux == x && m_units[i]->m_uy == y) return i;
-    }
+    for (int i = 0; i < m_units.size(); ++i) if (m_units[i]->m_ux == x && m_units[i]->m_uy == y) return i;
     return -1;
 }
 
 void UnitModel::removeUnit(int index) {
     if (index < 0 || index >= m_units.size()) return;
     beginRemoveRows(QModelIndex(), index, index);
-    Unit* u = m_units.takeAt(index);
-    delete u;
+    delete m_units.takeAt(index);
     endRemoveRows();
 }
 
