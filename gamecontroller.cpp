@@ -105,8 +105,6 @@ void GameController::handleUnitPurchasePlacement(int x, int y) {
 
     if (m_units->findUnitIndex(x, y) != -1) return;
 
-
-
     m_units->addUnit(x, y, m_currentPlayer, m_selectedBuyType);
     currentGold -= cost;
     emit goldChanged();
@@ -270,6 +268,8 @@ void GameController::endTurn() {
 }
 
 void GameController::resetGame() {
+    m_units->clear();
+    m_map->clearHighlights();
     m_currentPlayer = 1;
     m_p1Gold = 0;
     m_p2Gold = 0;

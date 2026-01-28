@@ -102,3 +102,10 @@ void UnitModel::updateHealth(int index, int health) {
     m_units[index]->m_health = health;
     emit dataChanged(createIndex(index, 0), createIndex(index, 0), {HealthRole});
 }
+
+void UnitModel::clear() {
+    beginResetModel();
+    qDeleteAll(m_units);
+    m_units.clear();
+    endResetModel();
+}

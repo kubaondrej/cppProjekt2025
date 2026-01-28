@@ -27,6 +27,7 @@ ApplicationWindow {
         id: gameOverDialog
         title: "Konec hry"
         onAccepted: {
+            gameController.resetGame()
             stack.pop()
         }
     }
@@ -282,20 +283,15 @@ ApplicationWindow {
                             text: modelData.name
                             Layout.fillWidth: true
 
-                            // Logika pro zapnutí tlačítka (dostatek zlata)
                             enabled: (gameController.currentPlayer === 1 ? gameController.p1Gold : gameController.p2Gold) >=
                                      (modelData.type === 0 ? 100 : modelData.type === 1 ? 200 : modelData.type === 2 ? 400 : modelData.type === 3 ? 350 : 300)
 
                             onClicked: gameController.selectUnitToBuy(modelData.type)
 
-                            // VLASTNÍ DESIGN TLAČÍTKA S OHRANIČENÍM
                             background: Rectangle {
                                 implicitWidth: 100
                                 implicitHeight: 40
                                 color: shopButton.down ? "#333" : (shopButton.enabled ? "#222" : "#111")
-
-                                // TADY JE TA MAGIE:
-                                // Pokud se typ v modelu shoduje s vybraným typem v controlleru, bude okraj žlutý
                                 border.color: (gameController.selectedBuyTypeInt === modelData.type && gameController.isBuyingActive) ? "yellow" : "#444"
                                 border.width: (gameController.selectedBuyTypeInt === modelData.type && gameController.isBuyingActive) ? 3 : 1
                                 radius: 4
@@ -340,7 +336,10 @@ ApplicationWindow {
                 anchors.top: parent.top
                 width: 30
                 height: 30
-                onClicked: stack.pop()
+                onClicked: {
+                    gameController.resetGame()
+                    stack.pop()
+                }
                 background: Rectangle { color: "red"; radius: 10 }
                 anchors.margins: 10
             }

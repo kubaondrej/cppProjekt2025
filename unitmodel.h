@@ -91,7 +91,6 @@ public:
     static QString getUnitName(UnitType type);
     void clear();
 private:
-private:
     QList<Unit*> m_units;
 };
 

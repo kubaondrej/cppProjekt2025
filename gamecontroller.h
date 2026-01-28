@@ -26,8 +26,6 @@ class GameController : public QObject
     //zvyrazneni v obchodu
     Q_PROPERTY(int selectedBuyTypeInt READ selectedBuyTypeInt NOTIFY buyTypeChanged)
     Q_PROPERTY(bool isBuyingActive READ isBuyingActive NOTIFY buyTypeChanged)
-
-    Q_PROPERTY(bool isPlacementPhase READ isPlacementPhase NOTIFY phaseChanged)
 public:
     explicit GameController(UnitModel *units, MapModel *map, QObject *parent = nullptr);
 
