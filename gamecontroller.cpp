@@ -83,6 +83,19 @@ void GameController::handleUnitPurchasePlacement(int x, int y) {
     emit statusChanged();
 }
 
+bool GameController::canPlaceOnTerrain(UnitType type, int x, int y) {
+    int tInt = m_map->data(m_map->index(y * m_map->size() + x), MapModel::TerrainRole).toInt();
+    Terrain terrain = static_cast<Terrain>(tInt);
+
+    if (terrain == Terrain::Mountain) return false;
+
+    if (type == UnitType::Ship) {
+        return terrain == Terrain::Water;
+    } else {
+        return terrain == Terrain::Grass;
+    }
+}
+
 void GameController::handleCombatPhaseClick(int x, int y) {
 //TODO
 }
