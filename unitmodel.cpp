@@ -11,27 +11,27 @@ Unit::Unit(UnitType type, int ownerId, int ux, int uy, QObject *parent)
     switch (type) {
     case UnitType::Soldier:
         m_name = "Voják";
-        m_maxHealth = 50; m_attackPower = 15; m_moveRange = 3; m_attackRange = 1;
+        m_maxHealth = 40; m_attackPower = 15; m_moveRange = 3; m_attackRange = 2;
         m_isBuilding = false;
         break;
     case UnitType::Sniper:
         m_name = "Sniper";
-        m_maxHealth = 20; m_attackPower = 40; m_moveRange = 2; m_attackRange = 4;
+        m_maxHealth = 20; m_attackPower = 40; m_moveRange = 2; m_attackRange = 5;
         m_isBuilding = false;
         break;
     case UnitType::Tank:
         m_name = "Tank";
-        m_maxHealth = 120; m_attackPower = 30; m_moveRange = 3; m_attackRange = 2;
+        m_maxHealth = 100; m_attackPower = 50; m_moveRange = 3; m_attackRange = 2;
         m_isBuilding = false;
         break;
     case UnitType::Ship:
         m_name = "Loď";
-        m_maxHealth = 80; m_attackPower = 25; m_moveRange = 4; m_attackRange = 3;
+        m_maxHealth = 80; m_attackPower = 35; m_moveRange = 4; m_attackRange = 3;
         m_isBuilding = false;
         break;
     case UnitType::MainBase:
         m_name = "Základna";
-        m_maxHealth = 500; m_attackPower = 0; m_moveRange = 0; m_attackRange = 0;
+        m_maxHealth = 200; m_attackPower = 0; m_moveRange = 0; m_attackRange = 0;
         m_isBuilding = true;
         break;
     case UnitType::GoldMine:
@@ -42,6 +42,7 @@ Unit::Unit(UnitType type, int ownerId, int ux, int uy, QObject *parent)
     }
     m_health = m_maxHealth;
 }
+
 
 int UnitModel::getUnitCost(UnitType type) {
     switch (type) {
