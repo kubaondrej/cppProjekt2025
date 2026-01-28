@@ -43,8 +43,29 @@ Unit::Unit(UnitType type, int ownerId, int ux, int uy, QObject *parent)
     m_health = m_maxHealth;
 }
 
+//data o jmenech a cene
+int UnitModel::getUnitCost(UnitType type) {
+    switch (type) {
+    case UnitType::Soldier: return 100;
+    case UnitType::Sniper: return 200;
+    case UnitType::Tank: return 400;
+    case UnitType::Ship: return 350;
+    case UnitType::GoldMine: return 300;
+    case UnitType::MainBase: return 0;
+    default: return 9999;
+    }
+}
 
-
+QString UnitModel::getUnitName(UnitType type) {
+    switch (type) {
+    case UnitType::Soldier: return "Voják (100g)";
+    case UnitType::Sniper: return "Sniper (200g)";
+    case UnitType::Tank: return "Tank (400g)";
+    case UnitType::Ship: return "Loď (350g)";
+    case UnitType::GoldMine: return "Důl (300g)";
+    default: return "";
+    }
+}
 
 
 
@@ -88,8 +109,7 @@ QHash<int, QByteArray> UnitModel::roleNames() const
     return roles;
 }
 //uz nevim co saskarna :(
-void UnitModel::addUnit(int x, int y, int ownerId, UnitType type)
-{
+void UnitModel::addUnit(int x, int y, int ownerId, UnitType type) {
     beginInsertRows(QModelIndex(), m_units.size(), m_units.size());
     m_units.append(new Unit(type, ownerId, x, y, this));
     endInsertRows();
