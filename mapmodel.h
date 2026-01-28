@@ -27,6 +27,9 @@ public:
     QVariant data(const QModelIndex& index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
     Q_INVOKABLE void generate(int n);
+    //zvyraznenii
+    void setTileHighlight(int index, int type);
+    void clearHighlights();
 
 signals:
     void sizeChanged();

@@ -43,6 +43,7 @@ void MapModel::generate(int n) {
     for (int y = 0; y < n; ++y) {
         for (int x = 0; x < n; ++x) {
             auto& tile = m_tiles[static_cast<size_t>(y * n + x)];
+
             if (x == 0 || x == n - 1 || y == 0 || y == n - 1) {
                 tile.terrain = Terrain::Water;
             }
@@ -61,28 +62,16 @@ void MapModel::generate(int n) {
         }
     }
 
-    int continents = std::max(1, n / 4);
-
-    for (int i = 0; i < continents; ++i) {
-        int cx = QRandomGenerator::global()->bounded(2, n - 2);
-        int cy = QRandomGenerator::global()->bounded(2, n - 2);
-        int radius = QRandomGenerator::global()->bounded(2, 5);
-
-        for (int y = cy - radius; y <= cy + radius; ++y) {
-            for (int x = cx - radius; x <= cx + radius; ++x) {
-                if (x < 0 || y < 0 || x >= n || y >= n)
-                    continue;
-
-                int dx = x - cx;
-                int dy = y - cy;
-
-                if (dx * dx + dy * dy <= radius * radius) {
-                    m_tiles[static_cast<size_t>(y * n + x)].terrain = Terrain::Grass;
-                }
-            }
-        }
-    }
-
     endResetModel();
     emit sizeChanged();
 }
+
+void MapModel::setTileHighlight(int index, int type) {
+  //TODO
+}
+
+void MapModel::clearHighlights() {
+    //todo
+}
+
+
