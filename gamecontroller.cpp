@@ -221,14 +221,21 @@ void GameController::endTurn() {
     emit statusChanged();
 }
 
-void GameController::restartGame() {
-    m_p1PlacedCount = 0;
-    m_p2PlacedCount = 0;
-    m_isPlacementPhase = true;
+void GameController::resetGame() {
     m_currentPlayer = 1;
-    m_statusMessage = "nova hra, rozmistuje hrac 1";
+    m_p1Gold = 0;
+    m_p2Gold = 0;
+    m_selectedUnitIndex = -1;
+    m_isBuyingActive = false;
+    m_isShopOpen = false;
+    m_phase = GamePhase::BasePlacement;
+    m_statusMessage = "Vítejte! Klikněte START HRY v menu.";
+    emit turnChanged();
     emit statusChanged();
+    emit goldChanged();
+    emit shopStateChanged();
     emit phaseChanged();
+    emit selectionChanged();
 }
 
 void GameController::selectUnitToBuy(int typeInt) {

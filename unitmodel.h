@@ -61,9 +61,11 @@ public:
     enum Roles {
         NameRole = Qt::UserRole + 1,
         HealthRole,
+        MaxHealthRole,
         OwnerIdRole,
         MoveRangeRole,
         AttackPowerRole,
+        AttackRangeRole,
         XRole,
         YRole,
         TypeRole
@@ -72,7 +74,7 @@ public:
     explicit UnitModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    QVariant data(const QModelIndex &index, int role) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
 
     void addUnit(int x, int y, int ownerId, UnitType type);

@@ -27,6 +27,7 @@ class GameController : public QObject
     Q_PROPERTY(int selectedBuyTypeInt READ selectedBuyTypeInt NOTIFY buyTypeChanged)
     Q_PROPERTY(bool isBuyingActive READ isBuyingActive NOTIFY buyTypeChanged)
 
+    Q_PROPERTY(bool isPlacementPhase READ isPlacementPhase NOTIFY phaseChanged)
 public:
     explicit GameController(UnitModel *units, MapModel *map, QObject *parent = nullptr);
 
@@ -35,7 +36,7 @@ public:
     bool isBuyingActive() const { return m_isBuyingActive; }
     int currentPlayer() const { return m_currentPlayer; }
     QString statusMessage() const { return m_statusMessage; }
-    bool isPlacementPhase() const { return m_isPlacementPhase; }
+    bool isPlacementPhase() const { return m_phase != GamePhase::Combat; }
     int selectedUnitIndex() const { return m_selectedUnitIndex; }
     bool isShopOpen() const { return m_isShopOpen; }
     int p1Gold() const { return m_p1Gold; }
@@ -43,7 +44,7 @@ public:
 
     Q_INVOKABLE void handleTileClick(int x, int y);
     Q_INVOKABLE void startGame();
-    Q_INVOKABLE void restartGame();
+    Q_INVOKABLE void resetGame();
     Q_INVOKABLE void selectUnitToBuy(int typeInt);
     Q_INVOKABLE void cancelBuy();
 
