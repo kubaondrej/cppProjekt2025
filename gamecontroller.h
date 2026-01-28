@@ -23,9 +23,16 @@ class GameController : public QObject
     Q_PROPERTY(int p1Gold READ p1Gold NOTIFY goldChanged)
     Q_PROPERTY(int p2Gold READ p2Gold NOTIFY goldChanged)
 
+    //zvyrazneni v obchodu
+    Q_PROPERTY(int selectedBuyTypeInt READ selectedBuyTypeInt NOTIFY buyTypeChanged)
+    Q_PROPERTY(bool isBuyingActive READ isBuyingActive NOTIFY buyTypeChanged)
+
 public:
     explicit GameController(UnitModel *units, MapModel *map, QObject *parent = nullptr);
 
+
+    int selectedBuyTypeInt() const { return static_cast<int>(m_selectedBuyType); }
+    bool isBuyingActive() const { return m_isBuyingActive; }
     int currentPlayer() const { return m_currentPlayer; }
     QString statusMessage() const { return m_statusMessage; }
     bool isPlacementPhase() const { return m_isPlacementPhase; }
@@ -41,6 +48,7 @@ public:
     Q_INVOKABLE void cancelBuy();
 
 signals:
+    void buyTypeChanged();
     void turnChanged();
     void statusChanged();
     void phaseChanged();
