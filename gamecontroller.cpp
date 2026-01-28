@@ -15,7 +15,6 @@ void GameController::handleTileClick(int x, int y) {
             return;
         }
 
-        m_units->addUnit(x, y, m_currentPlayer);
 
         if (m_currentPlayer == 1) m_p1PlacedCount++;
         else m_p2PlacedCount++;
@@ -116,8 +115,8 @@ void GameController::endTurn() {
 
     if (m_isPlacementPhase) {
         m_statusMessage = QString("rozmistovani: hrac %1 (zbyva %2)")
-                              .arg(m_currentPlayer)
-                              .arg(MAX_UNITS - (m_currentPlayer == 1 ? m_p1PlacedCount : m_p2PlacedCount));
+        .arg(m_currentPlayer)
+            .arg(MAX_UNITS - (m_currentPlayer == 1 ? m_p1PlacedCount : m_p2PlacedCount));
     } else {
         m_statusMessage = QString("Na tahu: Hráč %1").arg(m_currentPlayer);
     }
