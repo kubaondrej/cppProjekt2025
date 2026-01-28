@@ -87,12 +87,11 @@ QHash<int, QByteArray> UnitModel::roleNames() const
     roles[YRole]           = "uy";
     return roles;
 }
-
-void UnitModel::addUnit(int x, int y, int ownerId)
+//uz nevim co saskarna :(
+void UnitModel::addUnit(int x, int y, int ownerId, UnitType type)
 {
     beginInsertRows(QModelIndex(), m_units.size(), m_units.size());
-    Unit *u = new Unit("Soldier", ownerId, 3, 25, x, y, this);
-    m_units.append(u);
+    m_units.append(new Unit(type, ownerId, x, y, this));
     endInsertRows();
 }
 

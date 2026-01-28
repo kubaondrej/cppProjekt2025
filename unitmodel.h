@@ -80,7 +80,7 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-    Q_INVOKABLE void addUnit(int x, int y, int ownerId);
+    void addUnit(int x, int y, int ownerId, UnitType type);
     bool hasUnits(int ownerId) const;
 private:
     QList<Unit*> m_units;
