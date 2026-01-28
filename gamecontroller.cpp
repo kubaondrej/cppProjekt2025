@@ -1,4 +1,5 @@
 #include "gamecontroller.h"
+#include "unitfactory.h"
 #include <cmath>
 
 GameController::GameController(UnitModel *units, MapModel *map, QObject *parent)
@@ -88,7 +89,7 @@ void GameController::handleBasePlacement(int x, int y) {
 
 void GameController::handleUnitPurchasePlacement(int x, int y) {
     int &currentGold = (m_currentPlayer == 1 ? m_p1Gold : m_p2Gold);
-    int cost = UnitModel::getUnitCost(m_selectedBuyType);
+    int cost = UnitFactory::getUnitCost(m_selectedBuyType);
 
     if (currentGold < cost) {
         m_statusMessage = "Nedostatek $";
@@ -290,7 +291,7 @@ void GameController::updateHighlights() {
 }
 void GameController::selectUnitToBuy(int typeInt) {
     m_selectedBuyType = static_cast<UnitType>(typeInt);
-    int cost = UnitModel::getUnitCost(m_selectedBuyType);
+    int cost = UnitFactory::getUnitCost(m_selectedBuyType);
     int currentGold = (m_currentPlayer == 1 ? m_p1Gold : m_p2Gold);
 
     if (currentGold >= cost) {

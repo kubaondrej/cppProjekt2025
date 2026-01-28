@@ -1,4 +1,5 @@
 #include "unitmodel.h"
+#include "unitfactory.h"
 
 UnitModel::UnitModel(QObject *parent) : QAbstractListModel(parent) {}
 
@@ -6,63 +7,16 @@ UnitModel::UnitModel(QObject *parent) : QAbstractListModel(parent) {}
 Unit::Unit(UnitType type, int ownerId, int ux, int uy, QObject *parent)
     : QObject(parent), m_type(type), m_typeInt(static_cast<int>(type)), m_ownerId(ownerId), m_ux(ux), m_uy(uy)
 {
-    switch (type) {
-    case UnitType::Soldier:
-        m_name = "Voják";
-        m_maxHealth = 40; m_attackPower = 15; m_moveRange = 3; m_attackRange = 2;
-        m_isBuilding = false;
-        break;
-    case UnitType::Sniper:
-        m_name = "Sniper";
-        m_maxHealth = 20; m_attackPower = 40; m_moveRange = 2; m_attackRange = 5;
-        m_isBuilding = false;
-        break;
-    case UnitType::Tank:
-        m_name = "Tank";
-        m_maxHealth = 100; m_attackPower = 50; m_moveRange = 3; m_attackRange = 2;
-        m_isBuilding = false;
-        break;
-    case UnitType::Ship:
-        m_name = "Loď";
-        m_maxHealth = 80; m_attackPower = 35; m_moveRange = 4; m_attackRange = 3;
-        m_isBuilding = false;
-        break;
-    case UnitType::MainBase:
-        m_name = "Základna";
-        m_maxHealth = 200; m_attackPower = 0; m_moveRange = 0; m_attackRange = 0;
-        m_isBuilding = true;
-        break;
-    case UnitType::GoldMine:
-        m_name = "Důl";
-        m_maxHealth = 100; m_attackPower = 0; m_moveRange = 0; m_attackRange = 0;
-        m_isBuilding = true;
-        break;
-    }
-    m_health = m_maxHealth;
+
 }
 
 
 int UnitModel::getUnitCost(UnitType type) {
-    switch (type) {
-    case UnitType::Soldier: return 100;
-    case UnitType::Sniper: return 200;
-    case UnitType::Tank: return 400;
-    case UnitType::Ship: return 350;
-    case UnitType::GoldMine: return 300;
-    case UnitType::MainBase: return 0;
-    default: return 9999;
-    }
+    return UnitFactory::getUnitCost(type);
 }
 
 QString UnitModel::getUnitName(UnitType type) {
-    switch (type) {
-    case UnitType::Soldier: return "Voják (100g)";
-    case UnitType::Sniper: return "Sniper (200g)";
-    case UnitType::Tank: return "Tank (400g)";
-    case UnitType::Ship: return "Loď (350g)";
-    case UnitType::GoldMine: return "Důl (300g)";
-    default: return "";
-    }
+    return UnitFactory::getUnitName(type);
 }
 
 //oprava predesle funkce, NEMENIT!!!
@@ -111,7 +65,8 @@ QHash<int, QByteArray> UnitModel::roleNames() const
 
 void UnitModel::addUnit(int x, int y, int ownerId, UnitType type) {
     beginInsertRows(QModelIndex(), m_units.size(), m_units.size());
-    m_units.append(new Unit(type, ownerId, x, y, this));
+    Unit* u = UnitFactory::createUnit(type, ownerId, x, y, this);
+    m_units.append(u);
     endInsertRows();
 }
 bool UnitModel::hasUnits(int ownerId) const {

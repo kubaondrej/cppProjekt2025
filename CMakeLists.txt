@@ -19,6 +19,7 @@ qt_add_executable(appCPPProjekt
     unitmodel.h unitmodel.cpp
 
     gamecontroller.h gamecontroller.cpp
+    unitfactory.h unitfactory.cpp
 
 
 )
