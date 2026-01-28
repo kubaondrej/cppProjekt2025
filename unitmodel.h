@@ -68,9 +68,6 @@ public:
         XRole,
         YRole
     };
-    Unit* getUnit(int index) const;
-    void removeUnit(int index);
-    int findUnitIndex(int x, int y) const;
     Q_INVOKABLE void updatePosition(int index, int x, int y);
     Q_INVOKABLE void updateHealth(int index, int health);
 
@@ -82,6 +79,9 @@ public:
 
     void addUnit(int x, int y, int ownerId, UnitType type);
     bool hasUnits(int ownerId) const;
+    Unit* getUnit(int index) const;
+    void removeUnit(int index);
+    int findUnitIndex(int x, int y) const;
 private:
     QList<Unit*> m_units;
 };
