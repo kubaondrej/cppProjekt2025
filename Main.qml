@@ -43,6 +43,16 @@ ApplicationWindow {
         }
     }
 
+    Rectangle {
+        id: playerBorder
+        anchors.fill: parent
+        z: 999
+        color: "transparent"
+        border.width: 8
+        border.color: gameController.currentPlayer === 1 ? "#ff3333" : "#3333ff"
+        visible: stack.depth > 1
+    }
+
     Component {
         id: menuScreen
         Rectangle {
@@ -87,7 +97,7 @@ ApplicationWindow {
                         onClicked: {
                             var mapSize = parseInt(mapSizeInput.text)
 
-                            if (mapSize >= 5 && mapSize <= 20) {
+                            if (mapSize >= 5 && mapSize <= 30) {
                                 mapModel.generate(mapSize)
                                 stack.push(gameScreen)
                             } else {
@@ -136,14 +146,6 @@ ApplicationWindow {
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
                         verticalAlignment: Text.AlignVCenter
-                    }
-
-                    Rectangle {
-                        width: 30; height: 30
-                        radius: 15
-                        color: gameController.currentPlayer === 1 ? "blue" : "red"
-                        border.color: "white"
-                        border.width: 2
                     }
                 }
             }
@@ -237,27 +239,12 @@ ApplicationWindow {
             }
             Button {
                 text: "X"
-                font.pixelSize: 20
-                width: 50
-                height: 50
                 anchors.right: parent.right
-                anchors.bottom: parent.bottom
-                anchors.margins: 30
-                background: Rectangle {
-                    color: "red"
-                    radius: 25
-                    opacity: 0.8
-                }
-                contentItem: Text {
-                    text: parent.text
-                    font: parent.font
-                    color: "white"
-                    horizontalAlignment: Text.AlignHCenter
-                    verticalAlignment: Text.AlignVCenter
-                }
-                onClicked: {
-                    stack.pop()
-                }
+                anchors.top: parent.top
+                width: 30; height: 30
+                onClicked: stack.pop()
+                background: Rectangle { color: "red"; radius: 20 }
+                anchors.margins: 10
             }
         }
     }
