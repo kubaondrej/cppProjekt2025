@@ -1,9 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import QtQuick 2.15
-import QtQuick.Window 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Layouts 1.15
+import QtQuick.Layouts
 import QtQuick.Dialogs
 
 ApplicationWindow {
@@ -144,6 +141,12 @@ ApplicationWindow {
                         font.bold: true
                         Layout.fillWidth: true
                     }
+                    Text {
+                        text: "P1: " + gameController.p1Gold + "$ | P2: " + gameController.p2Gold + "$"
+                        color: "gold"
+                        font.pixelSize: 18
+                        font.bold: true
+                    }
                 }
             }
 
@@ -169,14 +172,16 @@ ApplicationWindow {
                     Repeater {
                         model: mapModel
                         delegate: Rectangle {
-                            width: currentCellSize; height: currentCellSize
+                            width: currentCellSize
+                            height: currentCellSize
                             color: terrain === 1 ? "#1a3c5e" : (terrain === 2 ? "#555" : "#2d5a27")
 
                             Text {
                                 text: "^"
                                 visible: terrain === 2
                                 anchors.centerIn: parent
-                                color: "#888"; font.pixelSize: 20
+                                color: "#888"
+                                font.pixelSize: 20
                             }
 
                             TapHandler {
@@ -191,7 +196,8 @@ ApplicationWindow {
                     delegate: Item {
                         x: ux * (currentCellSize + 1)
                         y: uy * (currentCellSize + 1)
-                        width: currentCellSize; height: currentCellSize
+                        width: currentCellSize
+                        height: currentCellSize
 
                         Rectangle {
                             anchors.centerIn: parent
@@ -207,27 +213,30 @@ ApplicationWindow {
                                 anchors.centerIn: parent
                                 Text {
                                     text: getUnitShort(type)
-                                    color: "white"; font.bold: true; anchors.horizontalCenter: parent.horizontalCenter
+                                    color: "white"
+                                    font.bold: true
+                                    anchors.horizontalCenter: parent.horizontalCenter
                                 }
                                 Text {
                                     text: health
-                                    color: "white"; font.pixelSize: 10; anchors.horizontalCenter: parent.horizontalCenter
+                                    color: "white"
+                                    font.pixelSize: 10
+                                    anchors.horizontalCenter: parent.horizontalCenter
                                 }
                             }
                         }
                     }
                 }
+            }
 
-                function getUnitShort(t) {
-                    if (t === 0) return "VOJ";
-                    if (t === 1) return "SNP";
-                    if (t === 2) return "TNK";
-                    if (t === 3) return "LOD";
-                    if (t === 4) return "BASE";
-                    if (t === 5) return "DUL";
-                    return "?";
-                }
-
+            function getUnitShort(t) {
+                if (t === 0) return "VOJ";
+                if (t === 1) return "SNP";
+                if (t === 2) return "TNK";
+                if (t === 3) return "LOD";
+                if (t === 4) return "BASE";
+                if (t === 5) return "DUL";
+                return "?";
             }
 
             Rectangle {
@@ -281,7 +290,7 @@ ApplicationWindow {
                 color: "grey"
                 Text {
                     anchors.centerIn: parent
-                    text: "ESC / X pro menu"
+                    text: "X pro návrat do menu"
                     color: "#555"
                 }
             }
@@ -293,10 +302,7 @@ ApplicationWindow {
                 width: 30
                 height: 30
                 onClicked: stack.pop()
-                background: Rectangle {
-                    color: "red";
-                    radius: 10
-                }
+                background: Rectangle { color: "red"; radius: 10 }
                 anchors.margins: 10
             }
 

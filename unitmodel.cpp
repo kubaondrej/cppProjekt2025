@@ -90,6 +90,7 @@ QVariant UnitModel::data(const QModelIndex &index, int role) const
     case AttackPowerRole: return u->m_attackPower;
     case XRole:           return u->m_ux;
     case YRole:           return u->m_uy;
+    case TypeRole:        return u->m_typeInt;
     }
 
     return QVariant();
@@ -105,6 +106,7 @@ QHash<int, QByteArray> UnitModel::roleNames() const
     roles[AttackPowerRole] = "attackPower";
     roles[XRole]           = "ux";
     roles[YRole]           = "uy";
+    roles[TypeRole] = "type";
     return roles;
 }
 

@@ -93,13 +93,13 @@ void GameController::handleUnitPurchasePlacement(int x, int y) {
     int cost = UnitModel::getUnitCost(m_selectedBuyType);
 
     if (currentGold < cost) {
-        m_statusMessage = "Nedostatek zlata!";
+        m_statusMessage = "Nedostatek $";
         emit statusChanged();
         return;
     }
 
     if (!canPlaceOnTerrain(m_selectedBuyType, x, y)) {
-        m_statusMessage = "Nevhodný terén!";
+        m_statusMessage = "Nevhodný terén";
         emit statusChanged();
         return;
     }

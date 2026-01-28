@@ -38,7 +38,6 @@ signals:
     void positionChanged();
 
 public:
-public:
     UnitType m_type;
     int m_typeInt;
     QString m_name;
@@ -66,7 +65,8 @@ public:
         MoveRangeRole,
         AttackPowerRole,
         XRole,
-        YRole
+        YRole,
+        TypeRole
     };
 
     explicit UnitModel(QObject *parent = nullptr);

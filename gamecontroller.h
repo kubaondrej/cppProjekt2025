@@ -19,6 +19,9 @@ class GameController : public QObject
     Q_PROPERTY(QString statusMessage READ statusMessage NOTIFY statusChanged)
     Q_PROPERTY(bool isPlacementPhase READ isPlacementPhase NOTIFY phaseChanged)
     Q_PROPERTY(int selectedUnitIndex READ selectedUnitIndex NOTIFY selectionChanged)
+    Q_PROPERTY(bool isShopOpen READ isShopOpen NOTIFY shopStateChanged)
+    Q_PROPERTY(int p1Gold READ p1Gold NOTIFY goldChanged)
+    Q_PROPERTY(int p2Gold READ p2Gold NOTIFY goldChanged)
 
 public:
     explicit GameController(UnitModel *units, MapModel *map, QObject *parent = nullptr);
@@ -27,6 +30,9 @@ public:
     QString statusMessage() const { return m_statusMessage; }
     bool isPlacementPhase() const { return m_isPlacementPhase; }
     int selectedUnitIndex() const { return m_selectedUnitIndex; }
+    bool isShopOpen() const { return m_isShopOpen; }
+    int p1Gold() const { return m_p1Gold; }
+    int p2Gold() const { return m_p2Gold; }
 
     Q_INVOKABLE void handleTileClick(int x, int y);
     Q_INVOKABLE void startGame();
