@@ -65,6 +65,7 @@ private:
     UnitModel *m_units;
     MapModel *m_map;
     bool m_isShopOpen = false;
+    bool m_ongoing=false;
 
     int m_currentPlayer = 1;
     int m_selectedUnitIndex = -1;

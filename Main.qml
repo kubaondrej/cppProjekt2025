@@ -186,11 +186,25 @@ ApplicationWindow {
                             }
                             Rectangle {
                                 anchors.fill: parent
-                                z: 5
-                                color: "transparent"
-                                border.color: highlight === 1 ? "#00ff00" :
-                                              highlight === 2 ? "#ff0000" : "transparent"
-                                border.width: highlight > 0 ? 3 : 0
+                                z: 5 // Nad terénem
+
+                                color: {
+                                    if (model.highlight === 1 || model.highlight === 3)
+                                        return Qt.rgba(0, 1, 0, 0.3);
+
+                                    if (model.highlight === 4)
+                                        return Qt.rgba(1, 0, 1, 0.9);
+
+                                    return "transparent";
+                                }
+
+                                border.color: {
+                                    if (model.highlight === 2 || model.highlight === 3)
+                                        return "#0000FF";
+                                    return "transparent";
+                                }
+
+                                border.width: (model.highlight === 2 || model.highlight === 3) ? 3 : 0
                             }
 
                             TapHandler {

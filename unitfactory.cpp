@@ -16,15 +16,15 @@ void UnitFactory::configureUnitStats(Unit* unit, UnitType type)
         unit->m_name = "Voják";
         unit->m_maxHealth = 40;
         unit->m_attackPower = 15;
-        unit->m_moveRange = 3;
-        unit->m_attackRange = 2;
+        unit->m_moveRange = 2;
+        unit->m_attackRange = 3;
         unit->m_isBuilding = false;
         break;
     case UnitType::Sniper:
         unit->m_name = "Sniper";
         unit->m_maxHealth = 20;
         unit->m_attackPower = 40;
-        unit->m_moveRange = 2;
+        unit->m_moveRange = 1;
         unit->m_attackRange = 5;
         unit->m_isBuilding = false;
         break;

@@ -12,6 +12,7 @@ void GameController::startGame() {
     m_p2Gold = 0;
     m_selectedUnitIndex = -1;
     m_isBuyingActive = false;
+    m_ongoing = true;
     m_isShopOpen = false;
 
     switchPhase(GamePhase::BasePlacement);
@@ -201,7 +202,7 @@ void GameController::processCombat(int attackerIdx, int targetIdx) {
     Unit* attacker = m_units->getUnit(attackerIdx);
     Unit* target = m_units->getUnit(targetIdx);
 
-    int dist = std::max(std::abs(attacker->m_ux - target->m_ux), std::abs(attacker->m_uy - target->m_uy));
+    int dist = std::abs(attacker->m_ux - target->m_ux) + std::abs(attacker->m_uy - target->m_uy);
 
     if (dist <= attacker->m_attackRange) {
         int damage = attacker->m_attackPower;
@@ -278,6 +279,7 @@ void GameController::resetGame() {
     m_isShopOpen = false;
     m_phase = GamePhase::BasePlacement;
     m_statusMessage = "Vítejte! Klikněte START HRY v menu.";
+    m_ongoing=false;
     emit turnChanged();
     emit statusChanged();
     emit goldChanged();
@@ -292,35 +294,52 @@ void GameController::updateHighlights() {
     if (m_selectedUnitIndex == -1) return;
 
     Unit* u = m_units->getUnit(m_selectedUnitIndex);
+
     if (!u) return;
 
     int mapSize = m_map->size();
-    int totalTiles = mapSize * mapSize;
-
-    for (int i = 0; i < totalTiles; ++i) {
+    for (int i = 0; i < mapSize * mapSize; ++i) {
         int tx = i % mapSize;
         int ty = i / mapSize;
-        int dist = std::max(std::abs(u->m_ux - tx), std::abs(u->m_uy - ty));
+
+        int dist = std::abs(u->m_ux - tx) + std::abs(u->m_uy - ty);
+
+        if (dist == 0) continue;
+
         bool canMove = false;
-        if (!u->m_isBuilding && dist <= u->m_moveRange && canPlaceOnTerrain(u->m_type, tx, ty)) {
-            int otherUnitIdx = m_units->findUnitIndex(tx, ty);
-            if (otherUnitIdx == -1 || otherUnitIdx == m_selectedUnitIndex) {
-                canMove = true;
-            }
+        if (dist <= u->m_moveRange && canPlaceOnTerrain(u->m_type, tx, ty)) {
+            canMove = true;
         }
 
         bool canAttack = false;
-        if (dist <= u->m_attackRange) {
+        bool debug=false;
+        if (dist <=u->m_attackRange) {
             canAttack = true;
         }
+        if
+        (
+            tx==u->m_ux && ty==u->m_uy
+        )
+        {
+            m_map->setTileHighlight(i,4);
+        }
 
-        if (canMove) {
+        if (canMove && canAttack) {
+            m_map->setTileHighlight(i, 3);
+        } else if (canMove) {
             m_map->setTileHighlight(i, 1);
         } else if (canAttack) {
             m_map->setTileHighlight(i, 2);
         }
     }
 }
+
+/*Unit* attacker = m_units->getUnit(attackerIdx);
+Unit* target = m_units->getUnit(targetIdx);
+
+int dist = std::max(std::abs(attacker->m_ux - target->m_ux), std::abs(attacker->m_uy - target->m_uy));
+
+if (dist <= attacker->m_attackRange) {*/
 void GameController::selectUnitToBuy(int typeInt) {
     m_selectedBuyType = static_cast<UnitType>(typeInt);
     int cost = UnitFactory::getUnitCost(m_selectedBuyType);
