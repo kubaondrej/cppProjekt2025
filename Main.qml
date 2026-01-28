@@ -253,7 +253,12 @@ ApplicationWindow {
                     anchors.margins: 10
                     spacing: 10
 
-                    Text { text: "OBCHOD"; color: "white"; font.bold: true; Layout.alignment: Qt.AlignHCenter }
+                    Text {
+                        text: "OBCHOD"
+                        color: "white"
+                        font.bold: true
+                        Layout.alignment: Qt.AlignHCenter
+                    }
 
                     Repeater {
                         model: [
@@ -263,19 +268,45 @@ ApplicationWindow {
                             {name: "Loď (350)", type: 3},
                             {name: "Důl (300)", type: 5}
                         ]
+
                         delegate: Button {
+                            id: shopButton
                             text: modelData.name
                             Layout.fillWidth: true
-                            onClicked: gameController.selectUnitToBuy(modelData.type)
+
+                            // Logika pro zapnutí tlačítka (dostatek zlata)
                             enabled: (gameController.currentPlayer === 1 ? gameController.p1Gold : gameController.p2Gold) >=
                                      (modelData.type === 0 ? 100 : modelData.type === 1 ? 200 : modelData.type === 2 ? 400 : modelData.type === 3 ? 350 : 300)
+
+                            onClicked: gameController.selectUnitToBuy(modelData.type)
+
+                            // VLASTNÍ DESIGN TLAČÍTKA S OHRANIČENÍM
+                            background: Rectangle {
+                                implicitWidth: 100
+                                implicitHeight: 40
+                                color: shopButton.down ? "#333" : (shopButton.enabled ? "#222" : "#111")
+
+                                // TADY JE TA MAGIE:
+                                // Pokud se typ v modelu shoduje s vybraným typem v controlleru, bude okraj žlutý
+                                border.color: (gameController.selectedBuyTypeInt === modelData.type && gameController.isBuyingActive) ? "yellow" : "#444"
+                                border.width: (gameController.selectedBuyTypeInt === modelData.type && gameController.isBuyingActive) ? 3 : 1
+                                radius: 4
+                            }
+
+                            contentItem: Text {
+                                text: shopButton.text
+                                font: shopButton.font
+                                color: shopButton.enabled ? "white" : "#666"
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment: Text.AlignVCenter
+                            }
                         }
                     }
 
                     Item { Layout.fillHeight: true }
 
                     Button {
-                        text: gameController.isPlacementPhase ? "HOTOVO / DALŠÍ" : "KOUPIT / ZRUŠIT"
+                        text: gameController.isPlacementPhase ? "HOTOVO / DALŠÍ" : "ZRUŠIT VÝBĚR"
                         Layout.fillWidth: true
                         onClicked: gameController.cancelBuy()
                     }
