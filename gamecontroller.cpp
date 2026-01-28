@@ -7,6 +7,17 @@ GameController::GameController(UnitModel *units, MapModel *map, QObject *parent)
     m_statusMessage = "rozmistuje hrac 1";
 }
 
+void GameController::startGame() {
+    m_currentPlayer = 1;
+    m_p1Gold = 0;
+    m_p2Gold = 0;
+    m_selectedUnitIndex = -1;
+    m_isBuyingActive = false;
+    m_isShopOpen = false;
+
+    switchPhase(GamePhase::BasePlacement);
+}
+
 void GameController::switchPhase(GamePhase newPhase) {
     m_phase = newPhase;
     m_selectedUnitIndex = -1;
@@ -218,4 +229,32 @@ void GameController::restartGame() {
     m_statusMessage = "nova hra, rozmistuje hrac 1";
     emit statusChanged();
     emit phaseChanged();
+}
+
+void GameController::selectUnitToBuy(int typeInt) {
+    m_selectedBuyType = static_cast<UnitType>(typeInt);
+    int cost = UnitModel::getUnitCost(m_selectedBuyType);
+    int currentGold = (m_currentPlayer == 1 ? m_p1Gold : m_p2Gold);
+
+    if (currentGold >= cost) {
+        m_isBuyingActive = true;
+        m_statusMessage = "Klikni na mapu pro položení: " + UnitModel::getUnitName(m_selectedBuyType);
+    } else {
+        m_statusMessage = "Na toto nemáš peníze!";
+        m_isBuyingActive = false;
+    }
+    emit statusChanged();
+}
+
+void GameController::cancelBuy() {
+    m_isBuyingActive = false;
+    if (m_phase == GamePhase::UnitPurchase) {
+        if (m_currentPlayer == 1) {
+            m_currentPlayer = 2;
+            m_statusMessage = "Hráč 2: Nakup armádu";
+        } else {
+            switchPhase(GamePhase::Combat);
+        }
+        emit turnChanged();
+    }
 }

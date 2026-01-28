@@ -43,7 +43,6 @@ Unit::Unit(UnitType type, int ownerId, int ux, int uy, QObject *parent)
     m_health = m_maxHealth;
 }
 
-//data o jmenech a cene
 int UnitModel::getUnitCost(UnitType type) {
     switch (type) {
     case UnitType::Soldier: return 100;
@@ -108,7 +107,7 @@ QHash<int, QByteArray> UnitModel::roleNames() const
     roles[YRole]           = "uy";
     return roles;
 }
-//uz nevim co saskarna :(
+
 void UnitModel::addUnit(int x, int y, int ownerId, UnitType type) {
     beginInsertRows(QModelIndex(), m_units.size(), m_units.size());
     m_units.append(new Unit(type, ownerId, x, y, this));

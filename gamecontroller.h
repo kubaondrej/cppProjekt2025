@@ -18,6 +18,7 @@ class GameController : public QObject
     Q_PROPERTY(int currentPlayer READ currentPlayer NOTIFY turnChanged)
     Q_PROPERTY(QString statusMessage READ statusMessage NOTIFY statusChanged)
     Q_PROPERTY(bool isPlacementPhase READ isPlacementPhase NOTIFY phaseChanged)
+    Q_PROPERTY(int selectedUnitIndex READ selectedUnitIndex NOTIFY selectionChanged)
 
 public:
     explicit GameController(UnitModel *units, MapModel *map, QObject *parent = nullptr);
@@ -25,9 +26,13 @@ public:
     int currentPlayer() const { return m_currentPlayer; }
     QString statusMessage() const { return m_statusMessage; }
     bool isPlacementPhase() const { return m_isPlacementPhase; }
+    int selectedUnitIndex() const { return m_selectedUnitIndex; }
 
     Q_INVOKABLE void handleTileClick(int x, int y);
+    Q_INVOKABLE void startGame();
     Q_INVOKABLE void restartGame();
+    Q_INVOKABLE void selectUnitToBuy(int typeInt);
+    Q_INVOKABLE void cancelBuy();
 
 signals:
     void turnChanged();

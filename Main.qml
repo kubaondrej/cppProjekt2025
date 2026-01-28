@@ -95,8 +95,9 @@ ApplicationWindow {
                         onClicked: {
                             var mapSize = parseInt(mapSizeInput.text)
 
-                            if (mapSize >= 5 && mapSize <= 30) {
+                            if (mapSize >= 10 && mapSize <= 30) {
                                 mapModel.generate(mapSize)
+                                gameController.startGame()
                                 stack.push(gameScreen)
                             } else {
                                 messageDialog.open()
@@ -127,7 +128,7 @@ ApplicationWindow {
         id: gameScreen
         Item {
             Rectangle {
-                id: topBar
+                id: topPanel
                 width: parent.width
                 height: 50
                 color: "grey"
@@ -147,10 +148,10 @@ ApplicationWindow {
             }
 
             Flickable {
-                anchors.top: topBar.bottom
+                anchors.top: topPanel.bottom
                 anchors.bottom: bottomPanel.top
                 anchors.left: parent.left
-                anchors.right: parent.right
+                anchors.right: shopPanel.left
                 contentWidth: mapGrid.width
                 contentHeight: mapGrid.height
                 anchors.leftMargin: 100
@@ -177,43 +178,101 @@ ApplicationWindow {
                                 anchors.centerIn: parent
                                 color: "#888"; font.pixelSize: 20
                             }
+
+                            TapHandler {
+                                onTapped: gameController.handleTileClick(index % mapModel.size, Math.floor(index / mapModel.size))
+                            }
                         }
                     }
                 }
 
                 Repeater {
                     model: unitModel
-                    //vojáci
-                    Rectangle {
-                        id: unitRect
-                        width: grid.cellWidth * 0.8
-                        height: grid.cellHeight * 0.8
-                        radius: width / 2
+                    delegate: Item {
+                        x: ux * (currentCellSize + 1)
+                        y: uy * (currentCellSize + 1)
+                        width: currentCellSize; height: currentCellSize
 
-                        x: grid.x + ux * grid.cellWidth + (grid.cellWidth * 0.1)
-                        y: grid.y + uy * grid.cellHeight + (grid.cellHeight * 0.1)
-                        z: 10
+                        Rectangle {
+                            anchors.centerIn: parent
+                            width: currentCellSize * 0.8
+                            height: currentCellSize * 0.8
+                            radius: type === 4 || type === 5 ? 0 : width/2
 
-                        color: ownerId === 1 ? "blue" : "red"
-                        border.width: index === gameController.selectedUnitIndex ? 6 : 0
-                        border.color: "yellow"
+                            color: ownerId === 1 ? "#ff3333" : "#3333ff"
+                            border.color: gameController.selectedUnitIndex === index ? "white" : "black"
+                            border.width: 3
 
-                        Text{
-                            text:"hp"
-                            anchors.centerIn: parent.top
-                            color: "white"
-                            font.bold: true
-                            font.pixelSize: parent.width * 0.4}
-                        Text {
-                            anchors.bottom: parent.bottom
-                            text: health
-                            color: "white"
-                            font.bold: true
-                            font.pixelSize: parent.width * 0.4
+                            Column {
+                                anchors.centerIn: parent
+                                Text {
+                                    text: getUnitShort(type)
+                                    color: "white"; font.bold: true; anchors.horizontalCenter: parent.horizontalCenter
+                                }
+                                Text {
+                                    text: health
+                                    color: "white"; font.pixelSize: 10; anchors.horizontalCenter: parent.horizontalCenter
+                                }
+                            }
                         }
                     }
                 }
+
+                function getUnitShort(t) {
+                    if (t === 0) return "VOJ";
+                    if (t === 1) return "SNP";
+                    if (t === 2) return "TNK";
+                    if (t === 3) return "LOD";
+                    if (t === 4) return "BASE";
+                    if (t === 5) return "DUL";
+                    return "?";
+                }
+
             }
+
+            Rectangle {
+                id: shopPanel
+                anchors.right: parent.right
+                anchors.top: topPanel.bottom
+                anchors.bottom: bottomPanel.top
+                width: 200
+                color: "#151515"
+                visible: gameController.isShopOpen || !gameController.isPlacementPhase
+
+                ColumnLayout {
+                    anchors.fill: parent
+                    anchors.margins: 10
+                    spacing: 10
+
+                    Text { text: "OBCHOD"; color: "white"; font.bold: true; Layout.alignment: Qt.AlignHCenter }
+
+                    Repeater {
+                        model: [
+                            {name: "Voják (100)", type: 0},
+                            {name: "Sniper (200)", type: 1},
+                            {name: "Tank (400)", type: 2},
+                            {name: "Loď (350)", type: 3},
+                            {name: "Důl (300)", type: 5}
+                        ]
+                        delegate: Button {
+                            text: modelData.name
+                            Layout.fillWidth: true
+                            onClicked: gameController.selectUnitToBuy(modelData.type)
+                            enabled: (gameController.currentPlayer === 1 ? gameController.p1Gold : gameController.p2Gold) >=
+                                     (modelData.type === 0 ? 100 : modelData.type === 1 ? 200 : modelData.type === 2 ? 400 : modelData.type === 3 ? 350 : 300)
+                        }
+                    }
+
+                    Item { Layout.fillHeight: true }
+
+                    Button {
+                        text: gameController.isPlacementPhase ? "HOTOVO / DALŠÍ" : "KOUPIT / ZRUŠIT"
+                        Layout.fillWidth: true
+                        onClicked: gameController.cancelBuy()
+                    }
+                }
+            }
+
             Rectangle {
                 id: bottomPanel
                 anchors.bottom: parent.bottom
