@@ -132,120 +132,114 @@ ApplicationWindow {
                 id: topBar
                 width: parent.width
                 height: 60
-                color: "#2c3e50"
-                z: 100
+                color: "#222"
 
                 RowLayout {
                     anchors.fill: parent
                     anchors.margins: 10
+                    anchors.rightMargin: 60
                     Text {
                         text: gameController.statusMessage
-                        color: "white"
-                        font.pixelSize: 20
+                        color: "#00ffcc"
+                        font.pixelSize: 18
                         font.bold: true
                         Layout.fillWidth: true
-                        horizontalAlignment: Text.AlignHCenter
-                        verticalAlignment: Text.AlignVCenter
                     }
                 }
             }
 
-            Column {
+            Flickable {
                 anchors.top: topBar.bottom
-                anchors.bottom: parent.bottom
+                anchors.bottom: bottomPanel.top
                 anchors.left: parent.left
                 anchors.right: parent.right
+                contentWidth: mapGrid.width
+                contentHeight: mapGrid.height
+                anchors.leftMargin: 100
+                clip: true
 
-                Item {
-                    id: mapArea
-                    width: grid.width
-                    height: grid.height
-                    anchors.centerIn: parent
+                contentX: (contentWidth - width) / 2
+                contentY: (contentHeight - height) / 2
 
-                    GridView {
-                        id: grid
-                        interactive: false
+                GridLayout {
+                    id: mapGrid
+                    columns: mapModel.size
+                    columnSpacing: 1
+                    rowSpacing: 1
+
+                    Repeater {
                         model: mapModel
-                        cellWidth: root.currentCellSize
-                        cellHeight: root.currentCellSize
-                        width: mapModel.size * cellWidth
-                        height: mapModel.size * cellHeight
-                        //teren cella
                         delegate: Rectangle {
-                            width: grid.cellWidth
-                            height: grid.cellHeight
-                            border.width: 1
-                            border.color: rgba(1,1,1,0.1)
-                            color: terrain === 1 ? "blue" : "green"
-                            MouseArea {
-                                anchors.fill: parent
-                                hoverEnabled: true
-                                cursorShape: Qt.PointingHandCursor
+                            width: currentCellSize; height: currentCellSize
+                            color: terrain === 1 ? "#1a3c5e" : (terrain === 2 ? "#555" : "#2d5a27")
 
-                                onClicked: {
-                                    var col = index % mapModel.size
-                                    var row = Math.floor(index / mapModel.size)
-                                    console.log("Klik: [" + col + ", " + row + "]")
-                                    if(terrain!==1)
-                                    {
-                                        gameController.handleTileClick(col, row)
-                                                                        }
-                                }
-                                onEntered: {
-                                    parent.border.color = "yellow"
-                                    parent.border.width = 3
-                                }
-                                onExited: {
-                                    parent.border.width = 1
-                                    parent.border.color = "rgba(0,0,0,0.1)"
-                                }
-                            }
-                        }
-
-                        Repeater {
-                            model: unitModel
-                            //vojáci
-                            Rectangle {
-                                id: unitRect
-                                width: grid.cellWidth * 0.8
-                                height: grid.cellHeight * 0.8
-                                radius: width / 2
-
-                                x: grid.x + ux * grid.cellWidth + (grid.cellWidth * 0.1)
-                                y: grid.y + uy * grid.cellHeight + (grid.cellHeight * 0.1)
-                                z: 10
-
-                                color: ownerId === 1 ? "blue" : "red"
-                                border.width: index === gameController.selectedUnitIndex ? 6 : 0
-                                border.color: "yellow"
-
-                                Text{
-                                    text:"hp"
-                                    anchors.centerIn: parent.top
-                                    color: "white"
-                                    font.bold: true
-                                    font.pixelSize: parent.width * 0.4}
-                                Text {
-                                    anchors.bottom: parent.bottom
-                                    text: health
-                                    color: "white"
-                                    font.bold: true
-                                    font.pixelSize: parent.width * 0.4
-                                }
+                            Text {
+                                text: "^"
+                                visible: terrain === 2
+                                anchors.centerIn: parent
+                                color: "#888"; font.pixelSize: 20
                             }
                         }
                     }
                 }
+
+                Repeater {
+                    model: unitModel
+                    //vojáci
+                    Rectangle {
+                        id: unitRect
+                        width: grid.cellWidth * 0.8
+                        height: grid.cellHeight * 0.8
+                        radius: width / 2
+
+                        x: grid.x + ux * grid.cellWidth + (grid.cellWidth * 0.1)
+                        y: grid.y + uy * grid.cellHeight + (grid.cellHeight * 0.1)
+                        z: 10
+
+                        color: ownerId === 1 ? "blue" : "red"
+                        border.width: index === gameController.selectedUnitIndex ? 6 : 0
+                        border.color: "yellow"
+
+                        Text{
+                            text:"hp"
+                            anchors.centerIn: parent.top
+                            color: "white"
+                            font.bold: true
+                            font.pixelSize: parent.width * 0.4}
+                        Text {
+                            anchors.bottom: parent.bottom
+                            text: health
+                            color: "white"
+                            font.bold: true
+                            font.pixelSize: parent.width * 0.4
+                        }
+                    }
+                }
             }
+            Rectangle {
+                id: bottomPanel
+                anchors.bottom: parent.bottom
+                width: parent.width
+                height: 40
+                color: "#222"
+                Text {
+                    anchors.centerIn: parent
+                    text: "ESC / X pro menu"
+                    color: "#555"
+                }
+            }
+
             Button {
                 text: "X"
                 anchors.right: parent.right
                 anchors.top: parent.top
-                width: 30; height: 30
+                width: 30
+                height: 30
                 onClicked: stack.pop()
                 background: Rectangle { color: "red"; radius: 20 }
                 anchors.margins: 10
             }
+
         }
     }
 }
