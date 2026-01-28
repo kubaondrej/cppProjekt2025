@@ -43,8 +43,21 @@ void MapModel::generate(int n) {
     for (int y = 0; y < n; ++y) {
         for (int x = 0; x < n; ++x) {
             auto& tile = m_tiles[static_cast<size_t>(y * n + x)];
-            int r = QRandomGenerator::global()->bounded(100);
-            tile.terrain = (r < 25) ? Terrain::Water : Terrain::Grass;
+            if (x == 0 || x == n - 1 || y == 0 || y == n - 1) {
+                tile.terrain = Terrain::Water;
+            }
+            else {
+                bool isCenter = (x > n/4 && x < 3*n/4 && y > n/4 && y < 3*n/4);
+                int r = QRandomGenerator::global()->bounded(100);
+
+                if (isCenter && r < 30) {
+                    tile.terrain = Terrain::Mountain;
+                } else if (r < 10) {
+                    tile.terrain = Terrain::Water;
+                } else {
+                    tile.terrain = Terrain::Grass;
+                }
+            }
         }
     }
 

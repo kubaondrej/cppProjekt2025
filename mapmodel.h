@@ -5,7 +5,8 @@
 
 enum class Terrain : int {
     Grass = 0,
-    Water = 1
+    Water = 1,
+    Mountain = 2
 };
 
 struct Tile {
@@ -20,15 +21,11 @@ public:
     enum Roles {
         TerrainRole = Qt::UserRole + 1
     };
-
     explicit MapModel(QObject* parent = nullptr);
-
     int size() const;
-
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
     QVariant data(const QModelIndex& index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
-
     Q_INVOKABLE void generate(int n);
 
 signals:

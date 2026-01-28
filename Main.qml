@@ -227,14 +227,6 @@ ApplicationWindow {
                                     parent.border.width = 1
                                     parent.border.color = "rgba(0,0,0,0.1)"
                                 }
-
-                                Image {
-                                    id: terrainImg
-                                    source: terrain === 1 ? "qrc:/Images/water.png" : "qrc:/Images/grass.png"
-                                    anchors.centerIn: parent
-                                    width: grid.cellWidth
-                                    height: grid.cellHeight
-                                }
                             }
                         }
 
@@ -255,15 +247,6 @@ ApplicationWindow {
                                 border.width: index === gameController.selectedUnitIndex ? 6 : 0
                                 border.color: "yellow"
 
-                                Image {
-                                        id: soldier
-                                        anchors.centerIn: parent
-                                        width: parent.width * 0.8
-                                        height: parent.height * 0.8
-                                        fillMode: Image.PreserveAspectFit
-                                        visible: true
-                                        source: "qrc:/Images/soldier.png"
-                                    }
                                 Text{
                                     text:"hp"
                                     anchors.centerIn: parent.top
