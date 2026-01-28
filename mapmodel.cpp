@@ -67,11 +67,21 @@ void MapModel::generate(int n) {
 }
 
 void MapModel::setTileHighlight(int index, int type) {
-  //TODO
+    if (index < 0 || index >= static_cast<int>(m_tiles.size())) return;
+
+    if (m_tiles[index].highlight != type) {
+        m_tiles[index].highlight = type;
+        emit dataChanged(createIndex(index, 0), createIndex(index, 0), {HighlightRole});
+    }
 }
 
 void MapModel::clearHighlights() {
-    //todo
+    for (size_t i = 0; i < m_tiles.size(); ++i) {
+        if (m_tiles[i].highlight != 0) {
+            m_tiles[i].highlight = 0;
+        }
+    }
+    emit dataChanged(createIndex(0, 0), createIndex(m_tiles.size()-1, 0), {HighlightRole});
 }
 
 

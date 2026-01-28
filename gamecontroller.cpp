@@ -287,7 +287,39 @@ void GameController::resetGame() {
 }
 
 void GameController::updateHighlights() {
- //TODO
+    m_map->clearHighlights();
+
+    if (m_selectedUnitIndex == -1) return;
+
+    Unit* u = m_units->getUnit(m_selectedUnitIndex);
+    if (!u) return;
+
+    int mapSize = m_map->size();
+    int totalTiles = mapSize * mapSize;
+
+    for (int i = 0; i < totalTiles; ++i) {
+        int tx = i % mapSize;
+        int ty = i / mapSize;
+        int dist = std::max(std::abs(u->m_ux - tx), std::abs(u->m_uy - ty));
+        bool canMove = false;
+        if (!u->m_isBuilding && dist <= u->m_moveRange && canPlaceOnTerrain(u->m_type, tx, ty)) {
+            int otherUnitIdx = m_units->findUnitIndex(tx, ty);
+            if (otherUnitIdx == -1 || otherUnitIdx == m_selectedUnitIndex) {
+                canMove = true;
+            }
+        }
+
+        bool canAttack = false;
+        if (dist <= u->m_attackRange) {
+            canAttack = true;
+        }
+
+        if (canMove) {
+            m_map->setTileHighlight(i, 1);
+        } else if (canAttack) {
+            m_map->setTileHighlight(i, 2);
+        }
+    }
 }
 void GameController::selectUnitToBuy(int typeInt) {
     m_selectedBuyType = static_cast<UnitType>(typeInt);

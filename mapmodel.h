@@ -11,6 +11,7 @@ enum class Terrain : int {
 
 struct Tile {
     Terrain terrain = Terrain::Grass;
+    int highlight = 0;
 };
 
 class MapModel : public QAbstractListModel {
@@ -19,7 +20,8 @@ class MapModel : public QAbstractListModel {
 
 public:
     enum Roles {
-        TerrainRole = Qt::UserRole + 1
+        TerrainRole = Qt::UserRole + 1,
+        HighlightRole
     };
     explicit MapModel(QObject* parent = nullptr);
     int size() const;
