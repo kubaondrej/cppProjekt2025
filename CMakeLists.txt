@@ -32,7 +32,12 @@ qt_add_resources(appCPPProjekt "app_resources"
     FILES
         Main.qml
         Images/water.png
-        Images/camoDigital.jpg
+        Images/camoDigital.png
+        Images/camo_team_b.png
+        Images/camo_team_r.png
+        Images/grass.png
+        Images/rocks.png
+        Images/water.png
 )
 
 target_link_libraries(appCPPProjekt PRIVATE Qt6::Quick Qt6::QuickControls2)

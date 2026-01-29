@@ -59,7 +59,7 @@ ApplicationWindow {
 
             Image {
                 id: menuBackground
-                source: "qrc:/Images/camoDigital.jpg"
+                source: "qrc:/Images/camoDigital.png"
                 width: root.width - 30
                 height: root.height - 30
                 anchors.centerIn: parent
@@ -109,24 +109,24 @@ ApplicationWindow {
                             spacing: 20
                             CheckBox {
                                 id: smallMap
-                                text: "Malá (12)"
+                                text: "Malá (15)"
                                 checked: true
                                 ButtonGroup.group: sizeGroup
-                                property int val: 12
+                                property int val: 15
                                 contentItem: Text { text: parent.text; color: "white"; leftPadding: 30; verticalAlignment: Text.AlignVCenter }
                             }
                             CheckBox {
                                 id: mediumMap
-                                text: "Střední (20)"
+                                text: "Střední (25)"
                                 ButtonGroup.group: sizeGroup
-                                property int val: 20
+                                property int val: 25
                                 contentItem: Text { text: parent.text; color: "white"; leftPadding: 30; verticalAlignment: Text.AlignVCenter }
                             }
                             CheckBox {
                                 id: largeMap
-                                text: "Velká (30)"
+                                text: "Velká (35)"
                                 ButtonGroup.group: sizeGroup
-                                property int val: 30
+                                property int val: 35
                                 contentItem: Text { text: parent.text; color: "white"; leftPadding: 30; verticalAlignment: Text.AlignVCenter }
                             }
                         }
@@ -138,7 +138,7 @@ ApplicationWindow {
                             Layout.alignment: Qt.AlignHCenter
                         }
                         TextField {
-                                            id: mapSizeInput
+                                            id: coinCountTB
                                             placeholderText: "Celé čislo (0-99999)"
                                             text: "250"
                                             color: "white"
@@ -146,6 +146,28 @@ ApplicationWindow {
                                             validator: IntValidator { bottom: 0; top: 99999 }
 
                                         }
+                        CheckBox {
+                            id: fullscreen
+                            text: "Fullscreen"
+
+                            Layout.alignment: Qt.AlignHCenter
+
+
+                            contentItem: Text {
+                                text: parent.text
+                                color: "white"
+                                leftPadding: 30
+                                verticalAlignment: Text.AlignVCenter
+                            }
+
+                            onCheckedChanged: {
+                                if (checked) {
+                                    root.visibility = Window.FullScreen
+                                } else {
+                                    root.visibility = Window.Windowed
+                                }
+                            }
+                        }
                     }
 
                     RowLayout {
@@ -160,7 +182,7 @@ ApplicationWindow {
                             background: Rectangle { color: "green"; radius: 8 }
                             contentItem: Text { text: parent.text; color: "white"; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter; font.pixelSize: 18 }
                             onClicked: {
-                                var coinCount = parseInt(mapSizeInput.text)
+                                var coinCount = parseInt(coinCountTB.text)
                                 var selectedSize = sizeGroup.checkedButton.val
                                 mapModel.generate(selectedSize)
                                 gameController.startGame()
@@ -237,18 +259,22 @@ ApplicationWindow {
                         delegate: Rectangle {
                             width: currentCellSize
                             height: currentCellSize
-                            color: terrain === 1 ? "#1a3c5e" : (terrain === 2 ? "#555" : "#2d5a27")
 
-                            Text {
-                                text: "^"
-                                visible: terrain === 2
-                                anchors.centerIn: parent
-                                color: "#888";
-                                font.pixelSize: 20
+                            color: terrain === 1 ? "#1a3c5e" : (terrain === 2 ? "#555" : "#2d5a27") //jiz nepotrebne
+
+                            Image {
+                                id: terrainImage
+                                source: terrain === 1 ? "qrc:/Images/water.png" : (terrain === 2 ? "qrc:/Images/rocks.png" : "qrc:/Images/grass.png")
+                                width: currentCellSize
+                                height: currentCellSize
                             }
+
+
+
+
                             Rectangle {
                                 anchors.fill: parent
-                                z: 5 // Nad terénem
+                                z: 5
 
                                 color: {
                                     if (model.highlight === 1 || model.highlight === 3)
@@ -288,11 +314,17 @@ ApplicationWindow {
                             anchors.centerIn: parent
                             width: currentCellSize * 0.8
                             height: currentCellSize * 0.8
-                            radius: type === 4 || type === 5 ? 0 : width/2
+                            radius: type === 4 || type === 5 ? 0 : width / 2
 
                             color: ownerId === 1 ? "#ff3333" : "#3333ff"
                             border.color: gameController.selectedUnitIndex === index ? "white" : "black"
                             border.width: 3
+
+                            layer.enabled: true
+                            layer.smooth: true
+
+
+
 
                             Column {
                                 anchors.centerIn: parent
