@@ -8,7 +8,8 @@ ApplicationWindow {
     visible: true
     width: 1280
     height: 900
-    title: "PCP Projekt C&C hra"
+
+    title: "!T&B - Tanky a lodě!"
     property int currentCellSize: 60
 
     StackView {
@@ -54,67 +55,128 @@ ApplicationWindow {
     Component {
         id: menuScreen
         Rectangle {
-            color: "grey"
-            border.width: 20
-            radius: 15
+            color: "#1c1c1c"
 
-            ColumnLayout {
+            Image {
+                id: menuBackground
+                source: "qrc:/Images/camoDigital.jpg"
+                width: root.width - 30
+                height: root.height - 30
                 anchors.centerIn: parent
-                spacing: 30
+            }
 
-                Text {
-                    text: "C&C - Tanky a lodě"
-                    font.pixelSize: 48
-                    color: "white"
-                    font.bold: true
-                    Layout.alignment: Qt.AlignHCenter
-                }
+            Rectangle {
+                id: menuPanel
+                color: "#1c1c1c"
+                border.color: "#444"
+                border.width: 2
 
-                TextField {
-                    id: mapSizeInput
-                    placeholderText: "Velikost (10-30)"
-                    color: "white"
-                    Layout.alignment: Qt.AlignHCenter
-                }
+                width: mainColumn.width + 60
+                height: mainColumn.height + 60
+                anchors.centerIn: parent
 
-                RowLayout {
-                    spacing: 20
+                ColumnLayout {
+                    id: mainColumn
+                    anchors.centerIn: parent
+                    spacing: 25
 
-                    Button {
-                        text: "Začít hru"
-                        font.pixelSize: 24
-                        Layout.preferredWidth: 200
-                        Layout.preferredHeight: 60
-                        background: Rectangle {
-                            color: "green"
-                            radius: 10
-                        }
-
-                        onClicked: {
-                            var mapSize = parseInt(mapSizeInput.text)
-
-                            if (mapSize >= 10 && mapSize <= 30) {
-                                mapModel.generate(mapSize)
-                                gameController.startGame()
-                                stack.push(gameScreen)
-                            } else {
-                                messageDialog.open()
-                            }
-                        }
+                    // 1. Název hry
+                    Text {
+                        id: textLabel
+                        text: "T&B - Tanky a lodě"
+                        font.pixelSize: 48
+                        color: "white"
+                        font.bold: true
+                        Layout.alignment: Qt.AlignHCenter
                     }
 
-                    Button {
-                        text: "Konec"
-                        font.pixelSize: 24
-                        Layout.preferredWidth: 200
-                        Layout.preferredHeight: 60
-                        background: Rectangle {
-                            color: "red"
-                            radius: 10
+                    // 2. Sekce pro výběr velikosti
+                    ButtonGroup { id: sizeGroup }
+
+                    ColumnLayout {
+                        Layout.alignment: Qt.AlignHCenter
+                        spacing: 10
+
+                        Text {
+                            text: "VELIKOST MAPY"
+                            color: "white"
+                            font.pixelSize: 20
+                            font.bold: true
+                            Layout.alignment: Qt.AlignHCenter
                         }
 
-                        onClicked: {
-                            Qt.quit()
+                        RowLayout {
+                            spacing: 20
+                            CheckBox {
+                                id: smallMap
+                                text: "Malá (12)"
+                                checked: true
+                                ButtonGroup.group: sizeGroup
+                                property int val: 12
+                                contentItem: Text { text: parent.text; color: "white"; leftPadding: 30; verticalAlignment: Text.AlignVCenter }
+                            }
+                            CheckBox {
+                                id: mediumMap
+                                text: "Střední (20)"
+                                ButtonGroup.group: sizeGroup
+                                property int val: 20
+                                contentItem: Text { text: parent.text; color: "white"; leftPadding: 30; verticalAlignment: Text.AlignVCenter }
+                            }
+                            CheckBox {
+                                id: largeMap
+                                text: "Velká (30)"
+                                ButtonGroup.group: sizeGroup
+                                property int val: 30
+                                contentItem: Text { text: parent.text; color: "white"; leftPadding: 30; verticalAlignment: Text.AlignVCenter }
+                            }
+                        }
+                        Text {
+                            text: "POČÁTEČNÍ ZLAŤÁKY"
+                            color: "white"
+                            font.pixelSize: 20
+                            font.bold: true
+                            Layout.alignment: Qt.AlignHCenter
+                        }
+                        TextField {
+                                            id: mapSizeInput
+                                            placeholderText: "Celé čislo (0-99999)"
+                                            text: "250"
+                                            color: "white"
+                                            Layout.alignment: Qt.AlignHCenter
+                                            validator: IntValidator { bottom: 0; top: 99999 }
+
+                                        }
+                    }
+
+                    RowLayout {
+                        spacing: 20
+                        Layout.alignment: Qt.AlignHCenter
+
+                        Button {
+                            text: "Začít hru"
+                            font.bold: true
+                            Layout.preferredWidth: 160
+                            Layout.preferredHeight: 50
+                            background: Rectangle { color: "green"; radius: 8 }
+                            contentItem: Text { text: parent.text; color: "white"; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter; font.pixelSize: 18 }
+                            onClicked: {
+                                var coinCount = parseInt(mapSizeInput.text)
+                                var selectedSize = sizeGroup.checkedButton.val
+                                mapModel.generate(selectedSize)
+                                gameController.startGame()
+                                gameController.setStartingGold(coinCount)
+                                stack.push(gameScreen)
+                            }
+                        }
+
+                        Button {
+                            text: "Konec"
+                            font.bold: true
+                            Layout.preferredWidth: 160
+                            Layout.preferredHeight: 50
+                            background: Rectangle { color: "red"; radius: 8 }
+                            contentItem: Text { text: parent.text; color: "white"; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter; font.pixelSize: 18 }
+                            onClicked: Qt.quit()
                         }
                     }
                 }

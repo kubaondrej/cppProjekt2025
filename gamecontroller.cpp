@@ -26,10 +26,10 @@ void GameController::switchPhase(GamePhase newPhase) {
     if (m_phase == GamePhase::BasePlacement) {
         m_statusMessage = "Hráč 1: Umísti Hlavní Budovu";
     } else if (m_phase == GamePhase::UnitPurchase) {
-        m_p1Gold = 1000;
-        m_p2Gold = 1000;
+        m_p1Gold = m_startingGold;
+        m_p2Gold = m_startingGold;
         emit goldChanged();
-        m_statusMessage = "Hráč 1: Nakup armádu (1000g)";
+        m_statusMessage = "Hráč 1: Nakup armádu";
         m_currentPlayer = 1;
         m_isShopOpen = true;
     } else if (m_phase == GamePhase::Combat) {
@@ -67,6 +67,14 @@ void GameController::handleTileClick(int x, int y) {
     }
 }
 
+void GameController::setStartingGold(int gold)
+{
+    if(gold>=0)
+    {
+        m_startingGold=gold;
+    }
+
+}
 void GameController::handleBasePlacement(int x, int y) {
     if (!canPlaceOnTerrain(UnitType::MainBase, x, y)) {
         m_statusMessage = "Sem nelze postavit základnu (Jen tráva)!";
@@ -197,6 +205,9 @@ void GameController::handleCombatPhaseClick(int x, int y) {
         }
     }
 }
+
+
+
 //!nemenit!! nearly blackbox!!
 void GameController::processCombat(int attackerIdx, int targetIdx) {
     Unit* attacker = m_units->getUnit(attackerIdx);

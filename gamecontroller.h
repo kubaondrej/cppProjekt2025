@@ -42,6 +42,7 @@ public:
 
     Q_INVOKABLE void handleTileClick(int x, int y);
     Q_INVOKABLE void startGame();
+    Q_INVOKABLE void setStartingGold(int gold);
     Q_INVOKABLE void resetGame();
     Q_INVOKABLE void selectUnitToBuy(int typeInt);
     Q_INVOKABLE void cancelBuy();
@@ -79,10 +80,10 @@ private:
 
     int m_p1Gold = 0;
     int m_p2Gold = 0;
+    int m_startingGold=0;
     void moveUnit(int unitIdx, int x, int y);
     void attackUnit(int attackerIdx, int targetIdx);
     void checkWinCondition();
-
 
     void processTurnStart();
     void endTurn();

@@ -20,6 +20,9 @@ qt_add_executable(appCPPProjekt
 
     gamecontroller.h gamecontroller.cpp
     unitfactory.h unitfactory.cpp
+    Images/grass.png Images/soldier.png Images/water.png
+    images.qrc
+
 
 
 )
@@ -28,6 +31,8 @@ qt_add_resources(appCPPProjekt "app_resources"
     PREFIX "/"
     FILES
         Main.qml
+        Images/water.png
+        Images/camoDigital.jpg
 )
 
 target_link_libraries(appCPPProjekt PRIVATE Qt6::Quick Qt6::QuickControls2)
