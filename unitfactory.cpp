@@ -14,10 +14,10 @@ void UnitFactory::configureUnitStats(Unit* unit, UnitType type)
     switch (type) {
     case UnitType::Soldier:
         unit->m_name = "Voják";
-        unit->m_maxHealth = 40;
+        unit->m_maxHealth = 30;
         unit->m_attackPower = 15;
         unit->m_moveRange = 2;
-        unit->m_attackRange = 3;
+        unit->m_attackRange = 2;
         unit->m_isBuilding = false;
         break;
     case UnitType::Sniper:
@@ -25,14 +25,14 @@ void UnitFactory::configureUnitStats(Unit* unit, UnitType type)
         unit->m_maxHealth = 20;
         unit->m_attackPower = 40;
         unit->m_moveRange = 1;
-        unit->m_attackRange = 5;
+        unit->m_attackRange = 4;
         unit->m_isBuilding = false;
         break;
     case UnitType::Tank:
         unit->m_name = "Tank";
-        unit->m_maxHealth = 100;
+        unit->m_maxHealth = 90;
         unit->m_attackPower = 50;
-        unit->m_moveRange = 3;
+        unit->m_moveRange = 2;
         unit->m_attackRange = 2;
         unit->m_isBuilding = false;
         break;
@@ -67,10 +67,10 @@ void UnitFactory::configureUnitStats(Unit* unit, UnitType type)
 int UnitFactory::getUnitCost(UnitType type) {
     switch (type) {
     case UnitType::Soldier: return 100;
-    case UnitType::Sniper: return 200;
-    case UnitType::Tank: return 400;
-    case UnitType::Ship: return 350;
-    case UnitType::GoldMine: return 300;
+    case UnitType::Sniper: return 250;
+    case UnitType::Tank: return 500;
+    case UnitType::Ship: return 400;
+    case UnitType::GoldMine: return 350;
     case UnitType::MainBase: return 0;
     default: return 9999;
     }

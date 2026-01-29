@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
-
+import QtMultimedia
 ApplicationWindow {
     id: root
     visible: true
@@ -12,26 +12,24 @@ ApplicationWindow {
     title: "!T&B - Tanky a lodě!"
     property int currentCellSize: 60
 
+    MediaPlayer {
+        id: backgroundMusic
+        audioOutput: AudioOutput {}
+        source: "qrc:Sounds/background-music.mp3"
+        loops: MediaPlayer.Infinite
+    }
+
+    Component.onCompleted: {
+        backgroundMusic.play()
+    }
+
     StackView {
         id: stack
         anchors.fill: parent
         initialItem: menuScreen
     }
 
-    MessageDialog {
-        id: messageDialog
-        title: "Info"
-        text: "Zadejte velikost mapy (10-30)."
-    }
 
-    MessageDialog {
-        id: gameOverDialog
-        title: "Konec hry"
-        onAccepted: {
-            gameController.resetGame()
-            stack.pop()
-        }
-    }
 
     Connections {
         target: gameController
@@ -50,6 +48,8 @@ ApplicationWindow {
         border.width: 8
         border.color: gameController.currentPlayer === 1 ? "#ff3333" : "#3333ff"
         visible: stack.depth > 1
+
+
     }
 
     Component {
@@ -80,7 +80,6 @@ ApplicationWindow {
                     anchors.centerIn: parent
                     spacing: 25
 
-                    // 1. Název hry
                     Text {
                         id: textLabel
                         text: "T&B - Tanky a lodě"
@@ -90,7 +89,6 @@ ApplicationWindow {
                         Layout.alignment: Qt.AlignHCenter
                     }
 
-                    // 2. Sekce pro výběr velikosti
                     ButtonGroup { id: sizeGroup }
 
                     ColumnLayout {
@@ -148,7 +146,7 @@ ApplicationWindow {
                                         }
                         CheckBox {
                             id: fullscreen
-                            text: "Fullscreen"
+                            text: "Fullscreen?"
 
                             Layout.alignment: Qt.AlignHCenter
 
@@ -168,7 +166,32 @@ ApplicationWindow {
                                 }
                             }
                         }
+
+                        CheckBox {
+                            id: music
+                            text: "Zvuky?"
+
+                            Layout.alignment: Qt.AlignHCenter
+                            checked:true
+
+                            contentItem: Text {
+                                text: parent.text
+                                color: "white"
+                                leftPadding: 30
+                                verticalAlignment: Text.AlignVCenter
+
+                            }
+
+                            onCheckedChanged: {
+                                if (checked) {
+                                    backgroundMusic.play()
+                                } else {
+                                    backgroundMusic.stop()
+                                }
+                            }
+                        }
                     }
+
 
                     RowLayout {
                         spacing: 20
@@ -212,17 +235,18 @@ ApplicationWindow {
             Rectangle {
                 id: topPanel
                 width: parent.width
-                height: 50
-                color: "grey"
+                height: 65
+                color: "#404040"
 
                 RowLayout {
                     anchors.fill: parent
                     anchors.margins: 10
                     anchors.rightMargin: 60
+
                     Text {
                         text: gameController.statusMessage
-                        color: "black"
-                        font.pixelSize: 18
+                        color:(gameController.currentPlayer=== 0 || gameController.currentPlayer=== 1) ? "#ff3333" : "#3333ff" //TADYY
+                        font.pixelSize: 35
                         font.bold: true
                         Layout.fillWidth: true
                     }

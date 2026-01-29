@@ -38,6 +38,7 @@ qt_add_resources(appCPPProjekt "app_resources"
         Images/grass.png
         Images/rocks.png
         Images/water.png
+        Sounds/background-music.mp3
 )
 
 target_link_libraries(appCPPProjekt PRIVATE Qt6::Quick Qt6::QuickControls2)

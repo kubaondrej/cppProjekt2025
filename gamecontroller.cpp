@@ -133,8 +133,8 @@ void GameController::processTurnStart() {
     for (int i = 0; i < m_units->rowCount(); ++i) {
         Unit* u = m_units->getUnit(i);
         if (u->m_ownerId == m_currentPlayer) {
-            if (u->m_type == UnitType::MainBase) income += 100;
-            if (u->m_type == UnitType::GoldMine) income += 50;
+            if (u->m_type == UnitType::MainBase) income += 50;
+            if (u->m_type == UnitType::GoldMine) income += 70;
         }
     }
 
@@ -190,8 +190,8 @@ void GameController::handleCombatPhaseClick(int x, int y) {
                 emit statusChanged();
                 return;
             }
+            int dist = std::max(std::abs(selected->m_ux - x), std::abs(selected->m_uy - y));
 
-            int dist = std::abs(selected->m_ux - x) + std::abs(selected->m_uy - y);
             if (dist <= selected->m_moveRange && canPlaceOnTerrain(selected->m_type, x, y)) {
                 m_units->updatePosition(m_selectedUnitIndex, x, y);
                 m_selectedUnitIndex = -1;
@@ -313,18 +313,18 @@ void GameController::updateHighlights() {
         int tx = i % mapSize;
         int ty = i / mapSize;
 
-        int dist = std::abs(u->m_ux - tx) + std::abs(u->m_uy - ty);
-
-        if (dist == 0) continue;
+        int distAttack = std::abs(u->m_ux - tx) + std::abs(u->m_uy - ty);
+        int distMovement = std::max(std::abs(u->m_ux - tx), std::abs(u->m_uy - ty));
+        if (distAttack == 0 || distMovement == 0) continue;
 
         bool canMove = false;
-        if (dist <= u->m_moveRange && canPlaceOnTerrain(u->m_type, tx, ty)) {
+        if (distMovement <= u->m_moveRange && canPlaceOnTerrain(u->m_type, tx, ty)) {
             canMove = true;
         }
 
         bool canAttack = false;
         bool debug=false;
-        if (dist <=u->m_attackRange) {
+        if (distAttack <=u->m_attackRange) {
             canAttack = true;
         }
         if
